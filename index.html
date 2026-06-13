@@ -250,18 +250,18 @@ html, body {
 /* ════════════ photos ════════════ */
 .s-ph {
   display: flex; align-items: center; justify-content: center;
-  background: #fff; padding: 5rem;
+  background: #fff;
 }
-.s-ph img { max-width: 100%; max-height: 100%; object-fit: contain; }
+.s-ph img { width: 100%; height: 100%; object-fit: contain; }
 
 /* ════════════ video ════════════ */
 .s-vid {
   display: flex; align-items: center; justify-content: center;
-  background: #fff; padding: 5rem;
+  background: #fff;
 }
 .s-vid video {
-  max-width: 100%; max-height: 100%;
-  outline: none;
+  width: 100%; height: 100%;
+  object-fit: contain; outline: none;
 }
 
 /* ════════════ youtube ════════════ */
@@ -334,7 +334,7 @@ html, body {
         <div class="tl-body">
           <div class="tl-title">Casulo Arquitetura</div>
           <div class="tl-sub">Estágio em Arquitetura · Brasília, DF</div>
-          <div class="tl-desc">Desenvolvimento de projetos residenciais e comerciais, da concepção ao detalhamento técnico. Produção de pranchas, documentação e modelagem 3D. Vivɜncia prática em escritório com fluxo real de projeto.</div>
+          <div class="tl-desc">Desenvolvimento de projetos residenciais e comerciais, da concepção ao detalhamento técnico. Produção de pranchas, documentação e modelagem 3D. Vivência prática em escritório com fluxo real de projeto.</div>
         </div>
       </div>
 
@@ -587,4 +587,26 @@ function goTo(i){
   if(i === 2){
     document.querySelectorAll('.fi').forEach(e => { e.style.transition='none'; e.style.strokeDashoffset = C; });
     setTimeout(()=>{
-      document.querySelectorAll('.fi').forEac
+      document.querySelectorAll('.fi').forEach(e=>{
+        e.style.transition = 'stroke-dashoffset 1.4s cubic-bezier(.4,0,.2,1)';
+        e.style.strokeDashoffset = C - C * e.dataset.p / 100;
+      });
+    }, 80);
+  }
+}
+
+function updateNm(){
+  const nm = document.getElementById('nm');
+  if(cur > 0) nm.classList.add('show');
+  else nm.classList.remove('show');
+}
+
+document.getElementById('zl').addEventListener('click', () => go(-1));
+document.getElementById('zr').addEventListener('click', () => go(+1));
+document.addEventListener('keydown', e => {
+  if(e.key === 'ArrowRight' || e.key === 'ArrowDown') go(+1);
+  if(e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   go(-1);
+});
+</script>
+</body>
+</html>
