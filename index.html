@@ -34,14 +34,14 @@ html, body {
 }
 .slide.on { opacity: 1; pointer-events: auto; }
 .slide.on .btn-nav {
-  position: absolute; z-index: 600; pointer-events: auto;
+  position: absolute; z-index: 9200; pointer-events: auto;
 }
 
 /* ── click zones ── */
 #zl, #zr {
-  position: fixed; top: 0; bottom: 0; width: 50%; z-index: 500;
+  position: fixed; top: 0; bottom: 0; width: 50%; z-index: 9000;
   cursor: pointer; -webkit-tap-highlight-color: transparent;
-  touch-action: none;
+  touch-action: manipulation;
 }
 #zl { left: 0; }
 #zr { right: 0; }
@@ -52,7 +52,7 @@ html, body {
   font-family: var(--f-body);
   font-size: .58rem; font-weight: 400;
   letter-spacing: .28em; text-transform: uppercase;
-  color: var(--ink); z-index: 600; pointer-events: none;
+  color: var(--ink); z-index: 9100; pointer-events: none;
   opacity: 0; transition: opacity .6s ease;
 }
 #nm.show { opacity: 1; }
@@ -63,7 +63,7 @@ html, body {
   font-family: var(--f-body);
   font-size: .52rem; font-weight: 400;
   letter-spacing: .14em; color: var(--mid);
-  z-index: 600; pointer-events: none;
+  z-index: 9100; pointer-events: none;
   opacity: 0; transition: opacity .4s;
 }
 
@@ -263,14 +263,24 @@ html, body {
   max-width: 100%; max-height: 100%;
   outline: none;
 }
+
+/* ════════════ youtube ════════════ */
+.s-yt {
+  display: flex; align-items: center; justify-content: center;
+  background: #000;
+}
+.s-yt iframe {
+  width: 100%; height: 100%;
+  border: none; display: block;
+}
 </style>
 </head>
 <body>
 
 <div id="nm">Alexandre Mares</div>
 <div id="ct"></div>
-<div id="zl" onclick="go(-1)"></div>
-<div id="zr" onclick="go(+1)"></div>
+<div id="zl"></div>
+<div id="zr"></div>
 
 <!-- 0 — CAPA -->
 <div class="slide on" id="s0">
@@ -285,7 +295,7 @@ html, body {
 <div class="slide" id="s1">
   <div class="d-wrap" style="display:flex;align-items:center;gap:5vw;">
     <div style="flex-shrink:0;width:clamp(140px,16vw,220px);aspect-ratio:3/4;overflow:hidden;background:#111;">
-      <img src="midias/capa/capa.jpg"
+      <img src="midias/capa/06A4138A-9371-4750-810C-253A1901301B-4062-0000011B04F7F4C2.jpg"
         style="width:100%;height:100%;object-fit:cover;filter:grayscale(1);display:block;">
     </div>
     <div class="d-list">
@@ -324,7 +334,7 @@ html, body {
         <div class="tl-body">
           <div class="tl-title">Casulo Arquitetura</div>
           <div class="tl-sub">Estágio em Arquitetura · Brasília, DF</div>
-          <div class="tl-desc">Desenvolvimento de projetos residenciais e comerciais, da concepção ao detalhamento técnico. Produção de pranchas, documentação e modelagem 3D. Vivência prática em escritório com fluxo real de projeto.</div>
+          <div class="tl-desc">Desenvolvimento de projetos residenciais e comerciais, da concepção ao detalhamento técnico. Produção de pranchas, documentação e modelagem 3D. Vivɜncia prática em escritório com fluxo real de projeto.</div>
         </div>
       </div>
 
@@ -386,20 +396,20 @@ const CATS = [
   {
     name: 'Fotografia de Arquitetura',
     imgs: [
-      'midias/fotos/1.png','midias/fotos/2.jpg','midias/fotos/3.jpg',
-      'midias/fotos/4.jpg','midias/fotos/5.jpg','midias/fotos/6.jpg',
-      'midias/fotos/7.jpg','midias/fotos/8.png','midias/fotos/9.png',
+      'midias/fotos/1.png','midias/fotos/2.JPG','midias/fotos/3.jpg',
+      'midias/fotos/4.jpg','midias/fotos/5.JPG','midias/fotos/6.jpg',
+      'midias/fotos/7.JPG','midias/fotos/8.png','midias/fotos/9.png',
       'midias/fotos/10.png','midias/fotos/11.jpg',
     ],
-    vids: ['midias/fotos/13videos.mov']
+    ytvids: ['HZQ65R2iILU']
   },
   {
     name: '3D Render',
     imgs: [
-      'midias/3ds/1-3d-ia.png','midias/3ds/2-3ds-corona.png',
-      'midias/3ds/4-3ds-corona.jpg','midias/3ds/5-revit-ia.png',
-      'midias/3ds/6-revit-ia.png','midias/3ds/7-sketchup-d5.png',
-      'midias/3ds/8-ketchup-d5.png',
+      'midias/3ds/1  3d + ia.png','midias/3ds/2 3ds + corona.png',
+      'midias/3ds/4 3ds + corona.jpg','midias/3ds/5 revit + ia.png',
+      'midias/3ds/6 revit + ia.png','midias/3ds/7 sketchup + d5.PNG',
+      'midias/3ds/8 ketchup + d5 render.PNG',
     ]
   },
   {
@@ -420,11 +430,12 @@ const SLIDES = [
 ];
 
 CATS.forEach(cat => {
-  const hasContent = (cat.imgs && cat.imgs.length) || (cat.vids && cat.vids.length);
+  const hasContent = (cat.imgs && cat.imgs.length) || (cat.vids && cat.vids.length) || (cat.ytvids && cat.ytvids.length);
   if(!hasContent) return;
   SLIDES.push({type:'cat', name: cat.name});
   (cat.imgs||[]).forEach(src => SLIDES.push({type:'img', src, cat: cat.name}));
   (cat.vids||[]).forEach(src => SLIDES.push({type:'vid', src, cat: cat.name}));
+  (cat.ytvids||[]).forEach(id => SLIDES.push({type:'yt', id, cat: cat.name}));
 });
 
 const pad = n => String(n).padStart(2,'0');
@@ -468,6 +479,11 @@ SLIDES.forEach((s, i) => {
     const vid = d.querySelector('video');
     vid.addEventListener('ended', () => go(+1));
   }
+  else if(s.type === 'yt'){
+    d.className = 'slide s-yt';
+    d.dataset.ytid = s.id;
+    d.innerHTML = ``;
+  }
 
   document.body.appendChild(d);
 });
@@ -494,18 +510,30 @@ function getCatInfo(i){
   return {cat: s.cat, idx: idx+1, total};
 }
 
+function ytUnload(el){
+  const fr = el.querySelector('iframe');
+  if(fr) fr.src = '';
+}
+function ytLoad(el){
+  const id = el.dataset.ytid;
+  if(!id) return;
+  el.innerHTML = `<iframe src="https://www.youtube.com/embed/${id}?autoplay=1&loop=1&playlist=${id}&rel=0&modestbranding=1" allow="autoplay; fullscreen" allowfullscreen></iframe>`;
+}
+
 function go(d){
   const nx = cur + d;
   if(nx < 0 || nx >= SLIDES.length) return;
   const leaving = getEl(cur);
   const v = leaving.querySelector('video');
   if(v) v.pause();
+  ytUnload(leaving);
   leaving.classList.remove('on');
   cur = nx;
   const arriving = getEl(cur);
   arriving.classList.add('on');
   const av = arriving.querySelector('video');
   if(av){ av.currentTime = 0; av.play(); }
+  ytLoad(arriving);
 
   updateNm();
 
@@ -546,47 +574,17 @@ function goTo(i){
   const leaving = getEl(cur);
   const v = leaving.querySelector('video');
   if(v) v.pause();
+  ytUnload(leaving);
   leaving.classList.remove('on');
   cur = i;
   const arriving = getEl(cur);
   arriving.classList.add('on');
   const av = arriving.querySelector('video');
   if(av){ av.currentTime = 0; av.play(); }
+  ytLoad(arriving);
   document.getElementById('ct').style.opacity = 0;
   updateNm();
   if(i === 2){
     document.querySelectorAll('.fi').forEach(e => { e.style.transition='none'; e.style.strokeDashoffset = C; });
     setTimeout(()=>{
-      document.querySelectorAll('.fi').forEach(e=>{
-        e.style.transition = 'stroke-dashoffset 1.4s cubic-bezier(.4,0,.2,1)';
-        e.style.strokeDashoffset = C - C * e.dataset.p / 100;
-      });
-    }, 80);
-  }
-}
-
-document.addEventListener('keydown', e => {
-  if(e.key === 'ArrowRight') go(+1);
-  if(e.key === 'ArrowLeft')  go(-1);
-});
-
-/* ── swipe / touch ── */
-let _tx = null;
-document.addEventListener('touchstart', e => { _tx = e.touches[0].clientX; }, {passive:true});
-document.addEventListener('touchend', e => {
-  if(_tx === null) return;
-  const dx = e.changedTouches[0].clientX - _tx;
-  _tx = null;
-  if(Math.abs(dx) < 30) return;
-  go(dx < 0 ? +1 : -1);
-}, {passive:true});
-
-/* ── mostra nome a partir do slide 1 ── */
-function updateNm(){
-  const nm = document.getElementById('nm');
-  if(cur > 0) nm.classList.add('show');
-  else nm.classList.remove('show');
-}
-</script>
-</body>
-</html>
+      document.querySelectorAll('.fi').forEac
