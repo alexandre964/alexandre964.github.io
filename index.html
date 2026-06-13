@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alexandre Mares</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,300;0,400;0,700;0,800;1,300&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --ink: #111;
+  --mid: #bbb;
+  --f:   'Archivo', sans-serif;
+}
+
+html, body {
+  width: 100%; height: 100%;
+  font-family: var(--f);
+  background: #fff;
+  overflow: hidden;
+  color: var(--ink);
+}
+
+/* ── slides ── */
+.slide {
+  position: fixed; inset: 0;
+  opacity: 0; pointer-events: none;
+  transition: opacity .65s ease;
+}
+.slide.on { opacity: 1; pointer-events: auto; }
+.slide.on .btn-nav {
+  position: absolute; z-index: 600; pointer-events: auto;
+}
+
+/* ── click zones ── */
+#zl, #zr {
+  position: fixed; top: 0; bottom: 0; width: 50%; z-index: 500;
+}
+#zl { left: 0;  cursor: w-resize; }
+#zr { right: 0; cursor: e-resize; }
+
+/* ── fixed name top-left ── */
+#nm {
+  position: fixed; top: 2rem; left: 2.8rem;
+  font-size: .58rem; font-weight: 300;
+  letter-spacing: .28em; text-transform: uppercase;
+  color: var(--ink); z-index: 600; pointer-events: none;
+  opacity: 0; transition: opacity .6s ease;
+}
+#nm.show { opacity: 1; }
+
+/* ── counter top-right ── */
+#ct {
+  position: fixed; top: 2rem; right: 2.8rem;
+  font-size: .52rem; font-weight: 300;
+  letter-spacing: .14em; color: var(--mid);
+  z-index: 600; pointer-events: none;
+  opacity: 0; transition: opacity .4s;
+}
+
+/* ════════════ 0 — CAPA (blank) ════════════ */
+#s0 { background: #fff; }
+
+/* ════════════ 1 — DADOS ════════════ */
+#s1 { background: #fff; }
+
+.d-wrap {
+  position: absolute;
+  top: 50%; left: 55%;
+  transform: translateY(-50%);
+}
+
+.d-list {
+  display: flex; flex-direction: column;
+  gap: 1.6rem;
+}
+.d-item {
+  font-size: .75rem; font-weight: 300;
+  letter-spacing: .04em; color: var(--ink);
+  line-height: 1;
+}
+
+/* ════════════ 2 — TIMELINE + SKILLS ════════════ */
+#s2 { background: #fff; display: flex; align-items: stretch; }
+
+/* left — timeline */
+.tl-col {
+  width: 46%;
+  display: flex; align-items: center;
+  padding: 5rem 4vw 5rem 8vw;
+  border-right: 1px solid #efefef;
+}
+
+.tl-list {
+  display: flex; flex-direction: column;
+  gap: 3.2rem; width: 100%;
+}
+
+.tl-entry { display: grid; grid-template-columns: 68px 1fr; gap: 0 1rem; align-items: start; }
+
+.tl-year {
+  font-size: .52rem; font-weight: 400;
+  color: var(--mid); letter-spacing: .06em;
+  padding-top: .22rem;
+  display: flex; align-items: center; gap: .5rem;
+  white-space: nowrap;
+}
+.tl-year::after {
+  content: '';
+  display: block; width: 14px; height: 1px;
+  background: #ddd; flex-shrink: 0;
+}
+
+.tl-body {}
+.tl-title {
+  font-size: .78rem; font-weight: 800;
+  letter-spacing: .01em; line-height: 1.2;
+  margin-bottom: .18rem; color: var(--ink);
+}
+.tl-sub {
+  font-size: .58rem; font-weight: 300;
+  color: var(--mid); margin-bottom: .55rem;
+  letter-spacing: .02em;
+}
+.tl-desc {
+  font-size: .6rem; font-weight: 300;
+  color: #999; line-height: 1.7;
+}
+
+/* right — circles */
+.sk-wrap {
+  flex: 1;
+  display: flex; flex-direction: column;
+  align-items: flex-start; justify-content: center;
+  padding: 5rem 4vw 5rem 4vw;
+}
+
+.sk-label {
+  font-size: .48rem; font-weight: 300;
+  letter-spacing: .26em; text-transform: uppercase;
+  color: var(--mid); margin-bottom: 2.5rem;
+}
+
+.sk-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 90px);
+  gap: 2.5rem 2.8rem;
+}
+
+.sk-item {
+  display: flex; flex-direction: column;
+  align-items: center; gap: .7rem;
+}
+
+.sk-c {
+  position: relative; width: 80px; height: 80px;
+}
+.sk-c svg {
+  position: absolute; inset: 0;
+  transform: rotate(-90deg);
+}
+.sk-c .tr {
+  fill: none; stroke: #eee;
+  stroke-width: 1; stroke-dasharray: 3 5;
+}
+.sk-c .fi {
+  fill: none; stroke: var(--ink);
+  stroke-width: 2; stroke-linecap: round;
+  stroke-dasharray: 226; stroke-dashoffset: 226;
+  transition: stroke-dashoffset 1.4s cubic-bezier(.4,0,.2,1);
+}
+.sk-c .lt {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem; font-weight: 800;
+  color: #ebebeb; user-select: none;
+}
+.sk-name {
+  font-size: .5rem; font-weight: 700;
+  letter-spacing: .1em; text-transform: uppercase;
+  text-align: center; color: var(--ink);
+}
+.sk-lv {
+  font-size: .48rem; font-weight: 300;
+  color: var(--mid); text-align: center;
+  margin-top: -.2rem;
+}
+
+/* ════════════ sumário ════════════ */
+.s-summary {
+  background: #fff;
+  display: flex; align-items: flex-end; justify-content: flex-end;
+  padding: 0 8vw 12vh 0;
+}
+.sum-block { display: flex; flex-direction: column; gap: 2.8rem; }
+.sum-title {
+  font-size: .52rem; font-weight: 300;
+  letter-spacing: .26em; text-transform: uppercase;
+  color: var(--mid); margin-bottom: .8rem;
+  font-style: italic;
+}
+.sum-list {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 1.6rem 4rem;
+}
+.sum-item { }
+.sum-num {
+  font-size: .5rem; font-weight: 400;
+  letter-spacing: .1em; color: var(--mid);
+  margin-bottom: .3rem;
+}
+.sum-name {
+  font-size: .82rem; font-weight: 300;
+  color: var(--ink); letter-spacing: .02em;
+  line-height: 1.2;
+}
+
+/* ════════════ category separator ════════════ */
+.s-cat {
+  background: #fff;
+  display: flex; align-items: center;
+  padding-left: 8vw;
+}
+.cat-name {
+  font-size: clamp(.9rem, 1.8vw, 1.6rem);
+  font-weight: 300; letter-spacing: .18em;
+  text-transform: uppercase; color: var(--ink);
+}
+.cat-name b { font-weight: 800; }
+
+/* ════════════ photos ════════════ */
+.s-ph {
+  display: flex; align-items: center; justify-content: center;
+  background: #fff; padding: 5rem;
+}
+.s-ph img { max-width: 100%; max-height: 100%; object-fit: contain; }
+
+/* ════════════ video ════════════ */
+.s-vid {
+  display: flex; align-items: center; justify-content: center;
+  background: #fff; padding: 5rem;
+}
+.s-vid video {
+  max-width: 100%; max-height: 100%;
+  outline: none;
+}
+</style>
+</head>
+<body>
+
+<div id="nm">Alexandre Mares</div>
+<div id="ct"></div>
+<div id="zl" onclick="go(-1)"></div>
+<div id="zr" onclick="go(+1)"></div>
+
+<!-- 0 — CAPA -->
+<div class="slide on" id="s0">
+  <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
+    <div style="font-size:clamp(.85rem,1.3vw,1.2rem);font-weight:300;letter-spacing:.34em;text-transform:uppercase;color:#111;">
+      <b style="font-weight:800;">Alexandre</b> Mares
+    </div>
+  </div>
+</div>
+
+<!-- 1 — DADOS -->
+<div class="slide" id="s1">
+  <div class="d-wrap" style="display:flex;align-items:center;gap:5vw;">
+    <div style="flex-shrink:0;width:clamp(140px,16vw,220px);aspect-ratio:3/4;overflow:hidden;background:#111;">
+      <img src="midias/capa/capa.jpg"
+        style="width:100%;height:100%;object-fit:cover;filter:grayscale(1);display:block;">
+    </div>
+    <div class="d-list">
+      <div class="d-item">26 anos</div>
+      <div class="d-item">Brasília, DF</div>
+      <div class="d-item">alexandremaressguia@gmail.com</div>
+      <div class="d-item">+55 (61) 98175-0930</div>
+    </div>
+  </div>
+</div>
+
+<!-- 2 — TIMELINE + SKILLS -->
+<div class="slide" id="s2">
+
+  <!-- LEFT: timeline -->
+  <div class="tl-col">
+    <div class="tl-list">
+
+      <div class="tl-entry">
+        <div class="tl-year">2022</div>
+        <div class="tl-body">
+          <div class="tl-title">Arquitetura e Urbanismo</div>
+          <div class="tl-sub">Graduação em andamento · 6º semestre</div>
+          <div class="tl-desc">Foco em projeto arquitetônico, representação técnica e visualização. Desenvolvimento de repertório visual e domínio progressivo de ferramentas de modelagem, render e comunicação de projeto.</div>
+        </div>
+      </div>
+
+      <div class="tl-entry">
+        <div class="tl-year">2022</div>
+        <div class="tl-body">
+          <div class="tl-title">Revit Master</div>
+          <div class="tl-sub">Curso · 144 horas</div>
+        </div>
+      </div>
+
+      <div class="tl-entry">
+        <div class="tl-year">2024</div>
+        <div class="tl-body">
+          <div class="tl-title">Casulo Arquitetura</div>
+          <div class="tl-sub">Estágio em Arquitetura · Brasília, DF</div>
+          <div class="tl-desc">Desenvolvimento de projetos residenciais e comerciais, da concepção ao detalhamento técnico. Produção de pranchas, documentação e modelagem 3D. Vivência prática em escritório com fluxo real de projeto.</div>
+        </div>
+      </div>
+
+      <div class="tl-entry">
+        <div class="tl-year">2025</div>
+        <div class="tl-body">
+          <div class="tl-title">Agência Mares</div>
+          <div class="tl-sub">Estágio em Direção Visual · São Paulo, SP</div>
+          <div class="tl-desc">Criação visual, produção fotográfica e audiovisual para marcas e clientes. Identidades visuais, campanhas e conteúdo estratégico. Uso de IA aplicada à geração e tratamento de imagens e vídeos.</div>
+        </div>
+      </div>
+
+      <div class="tl-entry">
+        <div class="tl-year">2025</div>
+        <div class="tl-body">
+          <div class="tl-title">3DS Max + Corona — Ander Alencar</div>
+          <div class="tl-sub">Curso · 100 horas</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- RIGHT: circles -->
+  <div class="sk-wrap">
+    <div class="sk-label">Softwares</div>
+    <div class="sk-grid" id="sk-grid"></div>
+  </div>
+
+</div>
+
+<!-- slides 3+ injected by JS -->
+
+<script>
+// ── skills ─────────────────────────────────────────
+const SKS = [
+  {n:'Figma',      l:'Fi', lv:'Avançado',      p:80},
+  {n:'Lightroom',  l:'Lr', lv:'Avançado',      p:70},
+  {n:'Photoshop',  l:'Ps', lv:'Intermediário', p:50},
+  {n:'AutoCAD',    l:'Ac', lv:'Avançado',      p:80},
+  {n:'Revit',      l:'Rv', lv:'Avançado',      p:80},
+  {n:'SketchUp',   l:'Su', lv:'Avançado',      p:80},
+  {n:'3DS+Corona', l:'3D', lv:'Intermediário', p:60},
+  {n:'IA / Node',  l:'Ia', lv:'Avançado',      p:80},
+  {n:'CapCut',     l:'Cc', lv:'Avançado',      p:80},
+  {n:'D5 Render',  l:'D5', lv:'Avançado',      p:75},
+];
+
+const C = 226;
+document.getElementById('sk-grid').innerHTML = SKS.map(s=>`
+  <div class="sk-item">
+    <div class="sk-c">
+      <svg viewBox="0 0 80 80">
+        <circle class="tr" cx="40" cy="40" r="36"/>
+        <circle class="fi" cx="40" cy="40" r="36" data-p="${s.p}" style="stroke-dashoffset:${C}"/>
+      </svg>
+      <div class="lt">${s.l}</div>
+    </div>
+    <div class="sk-name">${s.n}</div>
+    <div class="sk-lv">${s.lv}</div>
+  </div>`).join('');
+
+// ── categories ─────────────────────────────────────
+const CATS = [
+  {
+    name: 'Fotografia de Arquitetura',
+    imgs: [
+      'midias/fotos/1.png',
+      'midias/fotos/2.jpg',
+      'midias/fotos/3.jpg',
+      'midias/fotos/4.jpg',
+      'midias/fotos/5.jpg',
+      'midias/fotos/6.jpg',
+      'midias/fotos/7.jpg',
+      'midias/fotos/8.png',
+      'midias/fotos/9.png',
+      'midias/fotos/10.png',
+      'midias/fotos/11.jpg',
+    ],
+    vids: ['midias/fotos/13videos.mov']
+  },
+  {
+    name: '3D Render',
+    imgs: [
+      'midias/3ds/1-3d-ia.png',
+      'midias/3ds/2-3ds-corona.png',
+      'midias/3ds/4-3ds-corona.jpg',
+      'midias/3ds/5-revit-ia.png',
+      'midias/3ds/6-revit-ia.png',
+      'midias/3ds/7-sketchup-d5.png',
+      'midias/3ds/8-ketchup-d5.png',
+    ]
+  },
+  {
+    name: 'Projetos',
+    imgs: [
+      'midias/projetos/magnific_photo-a-modern-skyscraper_swfHCAGl8e.png',
+      'midias/projetos/IMG_8582.jpg',
+      'midias/projetos/magnific_photo-a-modern-building-w_l7CqQMNgv9.png',
+    ]
+  },
+];
+
+// ── build slides array ─────────────────────────────
+const SLIDES = [
+  {type:'fixed', id:'s0'},
+  {type:'fixed', id:'s1'},
+  {type:'fixed', id:'s2'},
+  {type:'summary'},
+];
+
+CATS.forEach(cat => {
+  const hasContent = (cat.imgs && cat.imgs.length) || (cat.vids && cat.vids.length);
+  if(!hasContent) return; // skip empty categories
+  SLIDES.push({type:'cat', name: cat.name});
+  (cat.imgs||[]).forEach(src => SLIDES.push({type:'img', src, cat: cat.name}));
+  (cat.vids||[]).forEach(src => SLIDES.push({type:'vid', src, cat: cat.name}));
+});
+
+// ── inject dynamic slides ──────────────────────────
+const pad = n => String(n).padStart(2,'0');
+
+SLIDES.forEach((s, i) => {
+  if(s.type === 'fixed') return;
+  const d = document.createElement('div');
+  d.id = 'sd'+i;
+
+  if(s.type === 'summary'){
+    d.className = 'slide s-summary';
+    const filteredCats = CATS.filter(c=>(c.imgs&&c.imgs.length)||(c.vids&&c.vids.length));
+    d.innerHTML = `
+      <div class="sum-block">
+        <div class="sum-title">Trabalhos selecionados</div>
+        <div class="sum-list">
+          ${filteredCats.map((c,ci)=>{
+            const catIdx = SLIDES.findIndex(sl => sl.type === 'cat' && sl.name === c.name);
+            return `
+              <div class="sum-item btn-nav" onclick="goTo(${catIdx})" style="cursor:pointer;position:relative;">
+                <div class="sum-num">0${ci+1}.</div>
+                <div class="sum-name">${c.name}</div>
+              </div>`;
+          }).join('')}
+        </div>
+      </div>`;
+  }
+  else if(s.type === 'cat'){
+    d.className = 'slide s-cat';
+    const parts = s.name.split(' ');
+    const last = parts.pop();
+    d.innerHTML = `<div class="cat-name">${parts.join(' ')} <b>${last}</b></div>`;
+  }
+  else if(s.type === 'img'){
+    d.className = 'slide s-ph';
+    d.innerHTML = `<img src="${s.src}" loading="lazy">`;
+  }
+  else if(s.type === 'vid'){
+    d.className = 'slide s-vid';
+    d.innerHTML = `<video src="${s.src}" playsinline preload="auto" style="pointer-events:none"></video>`;
+    const vid = d.querySelector('video');
+    vid.addEventListener('ended', () => go(+1));
+  }
+
+  document.body.appendChild(d);
+});
+
+// ── navigation ─────────────────────────────────────
+let cur = 0;
+
+function getEl(i){
+  const s = SLIDES[i];
+  if(s.type === 'fixed') return document.getElementById(s.id);
+  if(s.type === 'end')   return document.getElementById('sd-end');
+  return document.getElementById('sd'+i);
+}
+
+// track per-cat image index for counter
+function getCatInfo(i){
+  const s = SLIDES[i];
+  if(s.type !== 'img') return null;
+  // count images in same category before i
+  let idx = 0, total = 0;
+  SLIDES.forEach((sl, j) => {
+    if(sl.type === 'img' && sl.cat === s.cat){
+      total++;
+      if(j < i) idx++;
+    }
+  });
+  return {cat: s.cat, idx: idx+1, total};
+}
+
+function go(d){
+  const nx = cur + d;
+  if(nx < 0 || nx >= SLIDES.length) return;
+  const leaving = getEl(cur);
+  const v = leaving.querySelector('video');
+  if(v) v.pause();
+  leaving.classList.remove('on');
+  cur = nx;
+  const arriving = getEl(cur);
+  arriving.classList.add('on');
+  const av = arriving.querySelector('video');
+  if(av){ av.currentTime = 0; av.play(); }
+
+  if(cur === 2){
+    document.querySelectorAll('.fi').forEach(e => { e.style.transition='none'; e.style.strokeDashoffset = C; });
+    setTimeout(()=>{
+      document.querySelectorAll('.fi').forEach(e=>{
+        e.style.transition = 'stroke-dashoffset 1.4s cubic-bezier(.4,0,.2,1)';
+        e.style.strokeDashoffset = C - C * e.dataset.p / 100;
+      });
+    }, 80);
+  }
+
+  const ct = document.getElementById('ct');
+  const info = getCatInfo(cur);
+  if(info){
+    ct.textContent = pad(info.idx) + ' / ' + pad(info.total);
+    ct.style.opacity = 1;
+  } else {
+    ct.style.opacity = 0;
+  }
+}
+
+// final slide
+(()=>{
+  const d = document.createElement('div');
+  d.id = 'sd-end';
+  d.className = '
