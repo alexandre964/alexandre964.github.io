@@ -26,7 +26,7 @@ html, body {
   color: var(--ink);
 }
 
-/* ââ slides ââ */
+/* ── slides ── */
 .slide {
   position: fixed; inset: 0;
   opacity: 0; pointer-events: none;
@@ -37,7 +37,7 @@ html, body {
   position: absolute; z-index: 9200; pointer-events: auto;
 }
 
-/* ââ click zones ââ */
+/* ── click zones ── */
 #zl, #zr {
   position: fixed; top: 0; bottom: 0; width: 50%; z-index: 9000;
   cursor: pointer; -webkit-tap-highlight-color: transparent;
@@ -46,7 +46,7 @@ html, body {
 #zl { left: 0; }
 #zr { right: 0; }
 
-/* ââ fixed name top-left ââ */
+/* ── fixed name top-left ── */
 #nm {
   position: fixed; top: 2rem; left: 2.8rem;
   font-family: var(--f-body);
@@ -57,7 +57,7 @@ html, body {
 }
 #nm.show { opacity: 1; }
 
-/* ââ counter top-right ââ */
+/* ── counter top-right ── */
 #ct {
   position: fixed; top: 2rem; right: 2.8rem;
   font-family: var(--f-body);
@@ -67,10 +67,10 @@ html, body {
   opacity: 0; transition: opacity .4s;
 }
 
-/* ââââââââââââ 0 â CAPA ââââââââââââ */
+/* ════════════ 0 — CAPA ════════════ */
 #s0 { background: #fff; }
 
-/* ââââââââââââ 1 â DADOS ââââââââââââ */
+/* ════════════ 1 — DADOS ════════════ */
 #s1 { background: #fff; }
 
 .d-wrap {
@@ -90,7 +90,7 @@ html, body {
   line-height: 1;
 }
 
-/* ââââââââââââ 2 â TIMELINE + SKILLS ââââââââââââ */
+/* ════════════ 2 — TIMELINE + SKILLS ════════════ */
 #s2 { background: #fff; display: flex; align-items: stretch; }
 
 .tl-col {
@@ -139,7 +139,7 @@ html, body {
   color: #999; line-height: 1.7;
 }
 
-/* right â circles */
+/* right — circles */
 .sk-wrap {
   flex: 1;
   display: flex; flex-direction: column;
@@ -202,7 +202,7 @@ html, body {
   margin-top: -.2rem;
 }
 
-/* ââââââââââââ sumÃ¡rio ââââââââââââ */
+/* ════════════ sumário ════════════ */
 .s-summary {
   background: #fff;
   display: flex; align-items: flex-end; justify-content: flex-end;
@@ -233,7 +233,7 @@ html, body {
   line-height: 1.2;
 }
 
-/* ââââââââââââ category separator ââââââââââââ */
+/* ════════════ category separator ════════════ */
 .s-cat {
   background: #fff;
   display: flex; align-items: center;
@@ -247,14 +247,14 @@ html, body {
 }
 .cat-name b { font-weight: 900; }
 
-/* ââââââââââââ photos ââââââââââââ */
+/* ════════════ photos ════════════ */
 .s-ph {
   display: flex; align-items: center; justify-content: center;
   background: #fff;
 }
 .s-ph img { width: 100%; height: 100%; object-fit: contain; }
 
-/* ââââââââââââ video ââââââââââââ */
+/* ════════════ video ════════════ */
 .s-vid {
   display: flex; align-items: center; justify-content: center;
   background: #fff;
@@ -264,7 +264,7 @@ html, body {
   object-fit: contain; outline: none;
 }
 
-/* ââââââââââââ youtube ââââââââââââ */
+/* ════════════ youtube ════════════ */
 .s-yt {
   display: flex; align-items: center; justify-content: center;
   background: #000;
@@ -282,7 +282,7 @@ html, body {
 <div id="zl"></div>
 <div id="zr"></div>
 
-<!-- 0 â CAPA -->
+<!-- 0 — CAPA -->
 <div class="slide on" id="s0">
   <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
     <div style="font-family:'Barlow',sans-serif;font-size:clamp(.85rem,1.3vw,1.2rem);font-weight:300;letter-spacing:.34em;text-transform:uppercase;color:#111;">
@@ -291,7 +291,7 @@ html, body {
   </div>
 </div>
 
-<!-- 1 â DADOS -->
+<!-- 1 — DADOS -->
 <div class="slide" id="s1">
   <div class="d-wrap" style="display:flex;align-items:center;gap:5vw;">
     <div style="flex-shrink:0;width:clamp(140px,16vw,220px);aspect-ratio:3/4;overflow:hidden;background:#111;">
@@ -300,14 +300,14 @@ html, body {
     </div>
     <div class="d-list">
       <div class="d-item">26 anos</div>
-      <div class="d-item">BrasÃ­lia, DF</div>
+      <div class="d-item">Brasília, DF</div>
       <div class="d-item">alexandremaressguia@gmail.com</div>
       <div class="d-item">+55 (61) 98175-0930</div>
     </div>
   </div>
 </div>
 
-<!-- 2 â TIMELINE + SKILLS -->
+<!-- 2 — TIMELINE + SKILLS -->
 <div class="slide" id="s2">
   <div class="tl-col">
     <div class="tl-list">
@@ -316,8 +316,8 @@ html, body {
         <div class="tl-year">2022</div>
         <div class="tl-body">
           <div class="tl-title">Arquitetura e Urbanismo</div>
-          <div class="tl-sub">GraduaÃ§Ã£o em andamento Â· 6Âº semestre</div>
-          <div class="tl-desc">Foco em projeto arquitetÃ´nico, representaÃ§Ã£o tÃ©cnica e visualizaÃ§Ã£o. Desenvolvimento de repertÃ³rio visual e domÃ­nio progressivo de ferramentas de modelagem, render e comunicaÃ§Ã£o de projeto.</div>
+          <div class="tl-sub">Graduação em andamento · 6º semestre</div>
+          <div class="tl-desc">Foco em projeto arquitetônico, representação técnica e visualização. Desenvolvimento de repertório visual e domínio progressivo de ferramentas de modelagem, render e comunicação de projeto.</div>
         </div>
       </div>
 
@@ -325,7 +325,7 @@ html, body {
         <div class="tl-year">2022</div>
         <div class="tl-body">
           <div class="tl-title">Revit Master</div>
-          <div class="tl-sub">Curso Â· 144 horas</div>
+          <div class="tl-sub">Curso · 144 horas</div>
         </div>
       </div>
 
@@ -333,25 +333,25 @@ html, body {
         <div class="tl-year">2024</div>
         <div class="tl-body">
           <div class="tl-title">Casulo Arquitetura</div>
-          <div class="tl-sub">EstÃ¡gio em Arquitetura Â· BrasÃ­lia, DF</div>
-          <div class="tl-desc">Desenvolvimento de projetos residenciais e comerciais, da concepÃ§Ã£o ao detalhamento tÃ©cnico. ProduÃ§Ã£o de pranchas, documentaÃ§Ã£o e modelagem 3D. VivÃªncia prÃ¡tica em escritÃ³rio com fluxo real de projeto.</div>
+          <div class="tl-sub">Estágio em Arquitetura · Brasília, DF</div>
+          <div class="tl-desc">Desenvolvimento de projetos residenciais e comerciais, da concepção ao detalhamento técnico. Produção de pranchas, documentação e modelagem 3D. Vivência prática em escritório com fluxo real de projeto.</div>
         </div>
       </div>
 
       <div class="tl-entry">
         <div class="tl-year">2025</div>
         <div class="tl-body">
-          <div class="tl-title">AgÃªncia Mares</div>
-          <div class="tl-sub">EstÃ¡gio em DireÃ§Ã£o Visual Â· SÃ£o Paulo, SP</div>
-          <div class="tl-desc">CriaÃ§Ã£o visual, produÃ§Ã£o fotogrÃ¡fica e audiovisual para marcas e clientes. Identidades visuais, campanhas e conteÃºdo estratÃ©gico. Uso de IA aplicada Ã  geraÃ§Ã£o e tratamento de imagens e vÃ­deos.</div>
+          <div class="tl-title">Agência Mares</div>
+          <div class="tl-sub">Estágio em Direção Visual · São Paulo, SP</div>
+          <div class="tl-desc">Criação visual, produção fotográfica e audiovisual para marcas e clientes. Identidades visuais, campanhas e conteúdo estratégico. Uso de IA aplicada à geração e tratamento de imagens e vídeos.</div>
         </div>
       </div>
 
       <div class="tl-entry">
         <div class="tl-year">2025</div>
         <div class="tl-body">
-          <div class="tl-title">3DS Max + Corona â Ander Alencar</div>
-          <div class="tl-sub">Curso Â· 100 horas</div>
+          <div class="tl-title">3DS Max + Corona — Ander Alencar</div>
+          <div class="tl-sub">Curso · 100 horas</div>
         </div>
       </div>
 
@@ -366,16 +366,16 @@ html, body {
 
 <script>
 const SKS = [
-  {n:'Figma',      l:'Fi', lv:'AvanÃ§ado',      p:80},
-  {n:'Lightroom',  l:'Lr', lv:'AvanÃ§ado',      p:70},
-  {n:'Photoshop',  l:'Ps', lv:'IntermediÃ¡rio', p:50},
-  {n:'AutoCAD',    l:'Ac', lv:'AvanÃ§ado',      p:80},
-  {n:'Revit',      l:'Rv', lv:'AvanÃ§ado',      p:80},
-  {n:'SketchUp',   l:'Su', lv:'AvanÃ§ado',      p:80},
-  {n:'3DS+Corona', l:'3D', lv:'IntermediÃ¡rio', p:60},
-  {n:'IA / Node',  l:'Ia', lv:'AvanÃ§ado',      p:80},
-  {n:'CapCut',     l:'Cc', lv:'AvanÃ§ado',      p:80},
-  {n:'D5 Render',  l:'D5', lv:'AvanÃ§ado',      p:75},
+  {n:'Figma',      l:'Fi', lv:'Avançado',      p:80},
+  {n:'Lightroom',  l:'Lr', lv:'Avançado',      p:70},
+  {n:'Photoshop',  l:'Ps', lv:'Intermediário', p:50},
+  {n:'AutoCAD',    l:'Ac', lv:'Avançado',      p:80},
+  {n:'Revit',      l:'Rv', lv:'Avançado',      p:80},
+  {n:'SketchUp',   l:'Su', lv:'Avançado',      p:80},
+  {n:'3DS+Corona', l:'3D', lv:'Intermediário', p:60},
+  {n:'IA / Node',  l:'Ia', lv:'Avançado',      p:80},
+  {n:'CapCut',     l:'Cc', lv:'Avançado',      p:80},
+  {n:'D5 Render',  l:'D5', lv:'Avançado',      p:75},
 ];
 
 const C = 226;
@@ -396,28 +396,28 @@ const CATS = [
   {
     name: 'Fotografia de Arquitetura',
     imgs: [
-      'midias/fotos/1.png','midias/fotos/2.JPG','midias/fotos/3.jpg',
-      'midias/fotos/4.jpg','midias/fotos/5.JPG','midias/fotos/6.jpg',
-      'midias/fotos/7.JPG','midias/fotos/8.png','midias/fotos/9.png',
-      'midias/fotos/10.png','midias/fotos/11.jpg',
+      'midias/fotos/1.jpg','midias/fotos/2.jpg','midias/fotos/3.jpg',
+      'midias/fotos/4.jpg','midias/fotos/5.jpg','midias/fotos/6.jpg',
+      'midias/fotos/7.jpg','midias/fotos/8.jpg','midias/fotos/9.jpg',
+      'midias/fotos/10.jpg','midias/fotos/11.jpg',
     ],
     ytvids: ['HZQ65R2iILU']
   },
   {
     name: '3D Render',
     imgs: [
-      'midias/3ds/1  3d + ia.png','midias/3ds/2 3ds + corona.png',
-      'midias/3ds/4 3ds + corona.jpg','midias/3ds/5 revit + ia.png',
-      'midias/3ds/6 revit + ia.png','midias/3ds/7 sketchup + d5.PNG',
-      'midias/3ds/8 ketchup + d5 render.PNG',
+      'midias/3ds/1-3d-ia.jpg','midias/3ds/2-3ds-corona.jpg',
+      'midias/3ds/4-3ds-corona.jpg','midias/3ds/5-revit-ia.jpg',
+      'midias/3ds/6-revit-ia.jpg','midias/3ds/7-sketchup-d5.jpg',
+      'midias/3ds/8-ketchup-d5.jpg',
     ]
   },
   {
     name: 'Projetos',
     imgs: [
-      'midias/projetos/magnific_photo-a-modern-skyscraper_swfHCAGl8e.png',
+      'midias/projetos/magnific_photo-a-modern-skyscraper_swfHCAGl8e.jpg',
       'midias/projetos/IMG_8582.jpg',
-      'midias/projetos/magnific_photo-a-modern-building-w_l7CqQMNgv9.png',
+      'midias/projetos/magnific_photo-a-modern-building-w_l7CqQMNgv9.jpg',
     ]
   },
 ];
@@ -564,7 +564,7 @@ function go(d){
   d.style.cssText = 'background:#fff;display:flex;align-items:center;justify-content:center;';
   d.innerHTML = `
     <div style="font-family:'Barlow',sans-serif;font-size:clamp(.85rem,1.3vw,1.2rem);font-weight:300;letter-spacing:.34em;text-transform:uppercase;color:#111;">Obrigado</div>
-    <button onclick="goTo(0)" class="btn-nav" style="bottom:2rem;right:2.8rem;background:none;border:none;font-family:'Space Mono',monospace;font-size:.46rem;font-weight:400;letter-spacing:.22em;text-transform:uppercase;color:#bbb;cursor:pointer;">pÃ¡gina inicial</button>`;
+    <button onclick="goTo(0)" class="btn-nav" style="bottom:2rem;right:2.8rem;background:none;border:none;font-family:'Space Mono',monospace;font-size:.46rem;font-weight:400;letter-spacing:.22em;text-transform:uppercase;color:#bbb;cursor:pointer;">página inicial</button>`;
   document.body.appendChild(d);
   SLIDES.push({type:'end'});
 })();
@@ -610,4 +610,3 @@ document.addEventListener('keydown', e => {
 </script>
 </body>
 </html>
-                                                                                                                 
