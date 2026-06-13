@@ -6,14 +6,16 @@
 <title>Alexandre Mares</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,300;0,400;0,700;0,800;1,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,700;0,900;1,300&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
   --ink: #111;
   --mid: #bbb;
-  --f:   'Archivo', sans-serif;
+  --f-display: 'Barlow', sans-serif;
+  --f-body:    'Space Mono', monospace;
+  --f: var(--f-body);
 }
 
 html, body {
@@ -38,14 +40,17 @@ html, body {
 /* ── click zones ── */
 #zl, #zr {
   position: fixed; top: 0; bottom: 0; width: 50%; z-index: 500;
+  cursor: pointer; -webkit-tap-highlight-color: transparent;
+  touch-action: none;
 }
-#zl { left: 0;  cursor: w-resize; }
-#zr { right: 0; cursor: e-resize; }
+#zl { left: 0; }
+#zr { right: 0; }
 
 /* ── fixed name top-left ── */
 #nm {
   position: fixed; top: 2rem; left: 2.8rem;
-  font-size: .58rem; font-weight: 300;
+  font-family: var(--f-body);
+  font-size: .58rem; font-weight: 400;
   letter-spacing: .28em; text-transform: uppercase;
   color: var(--ink); z-index: 600; pointer-events: none;
   opacity: 0; transition: opacity .6s ease;
@@ -55,13 +60,14 @@ html, body {
 /* ── counter top-right ── */
 #ct {
   position: fixed; top: 2rem; right: 2.8rem;
-  font-size: .52rem; font-weight: 300;
+  font-family: var(--f-body);
+  font-size: .52rem; font-weight: 400;
   letter-spacing: .14em; color: var(--mid);
   z-index: 600; pointer-events: none;
   opacity: 0; transition: opacity .4s;
 }
 
-/* ════════════ 0 — CAPA (blank) ════════════ */
+/* ════════════ 0 — CAPA ════════════ */
 #s0 { background: #fff; }
 
 /* ════════════ 1 — DADOS ════════════ */
@@ -78,7 +84,8 @@ html, body {
   gap: 1.6rem;
 }
 .d-item {
-  font-size: .75rem; font-weight: 300;
+  font-family: var(--f-body);
+  font-size: .75rem; font-weight: 400;
   letter-spacing: .04em; color: var(--ink);
   line-height: 1;
 }
@@ -86,7 +93,6 @@ html, body {
 /* ════════════ 2 — TIMELINE + SKILLS ════════════ */
 #s2 { background: #fff; display: flex; align-items: stretch; }
 
-/* left — timeline */
 .tl-col {
   width: 46%;
   display: flex; align-items: center;
@@ -102,6 +108,7 @@ html, body {
 .tl-entry { display: grid; grid-template-columns: 68px 1fr; gap: 0 1rem; align-items: start; }
 
 .tl-year {
+  font-family: var(--f-body);
   font-size: .52rem; font-weight: 400;
   color: var(--mid); letter-spacing: .06em;
   padding-top: .22rem;
@@ -114,19 +121,21 @@ html, body {
   background: #ddd; flex-shrink: 0;
 }
 
-.tl-body {}
 .tl-title {
-  font-size: .78rem; font-weight: 800;
+  font-family: var(--f-display);
+  font-size: .78rem; font-weight: 700;
   letter-spacing: .01em; line-height: 1.2;
   margin-bottom: .18rem; color: var(--ink);
 }
 .tl-sub {
-  font-size: .58rem; font-weight: 300;
+  font-family: var(--f-body);
+  font-size: .52rem; font-weight: 400;
   color: var(--mid); margin-bottom: .55rem;
   letter-spacing: .02em;
 }
 .tl-desc {
-  font-size: .6rem; font-weight: 300;
+  font-family: var(--f-body);
+  font-size: .55rem; font-weight: 400;
   color: #999; line-height: 1.7;
 }
 
@@ -139,7 +148,8 @@ html, body {
 }
 
 .sk-label {
-  font-size: .48rem; font-weight: 300;
+  font-family: var(--f-body);
+  font-size: .48rem; font-weight: 400;
   letter-spacing: .26em; text-transform: uppercase;
   color: var(--mid); margin-bottom: 2.5rem;
 }
@@ -175,16 +185,19 @@ html, body {
 .sk-c .lt {
   position: absolute; inset: 0;
   display: flex; align-items: center; justify-content: center;
-  font-size: 1.1rem; font-weight: 800;
+  font-family: var(--f-display);
+  font-size: 1.1rem; font-weight: 900;
   color: #ebebeb; user-select: none;
 }
 .sk-name {
+  font-family: var(--f-body);
   font-size: .5rem; font-weight: 700;
   letter-spacing: .1em; text-transform: uppercase;
   text-align: center; color: var(--ink);
 }
 .sk-lv {
-  font-size: .48rem; font-weight: 300;
+  font-family: var(--f-body);
+  font-size: .48rem; font-weight: 400;
   color: var(--mid); text-align: center;
   margin-top: -.2rem;
 }
@@ -197,7 +210,8 @@ html, body {
 }
 .sum-block { display: flex; flex-direction: column; gap: 2.8rem; }
 .sum-title {
-  font-size: .52rem; font-weight: 300;
+  font-family: var(--f-body);
+  font-size: .52rem; font-weight: 400;
   letter-spacing: .26em; text-transform: uppercase;
   color: var(--mid); margin-bottom: .8rem;
   font-style: italic;
@@ -206,13 +220,14 @@ html, body {
   display: grid; grid-template-columns: 1fr 1fr;
   gap: 1.6rem 4rem;
 }
-.sum-item { }
 .sum-num {
+  font-family: var(--f-body);
   font-size: .5rem; font-weight: 400;
   letter-spacing: .1em; color: var(--mid);
   margin-bottom: .3rem;
 }
 .sum-name {
+  font-family: var(--f-display);
   font-size: .82rem; font-weight: 300;
   color: var(--ink); letter-spacing: .02em;
   line-height: 1.2;
@@ -225,11 +240,12 @@ html, body {
   padding-left: 8vw;
 }
 .cat-name {
+  font-family: var(--f-display);
   font-size: clamp(.9rem, 1.8vw, 1.6rem);
   font-weight: 300; letter-spacing: .18em;
   text-transform: uppercase; color: var(--ink);
 }
-.cat-name b { font-weight: 800; }
+.cat-name b { font-weight: 900; }
 
 /* ════════════ photos ════════════ */
 .s-ph {
@@ -259,8 +275,8 @@ html, body {
 <!-- 0 — CAPA -->
 <div class="slide on" id="s0">
   <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
-    <div style="font-size:clamp(.85rem,1.3vw,1.2rem);font-weight:300;letter-spacing:.34em;text-transform:uppercase;color:#111;">
-      <b style="font-weight:800;">Alexandre</b> Mares
+    <div style="font-family:'Barlow',sans-serif;font-size:clamp(.85rem,1.3vw,1.2rem);font-weight:300;letter-spacing:.34em;text-transform:uppercase;color:#111;">
+      <b style="font-weight:900;">Alexandre</b> Mares
     </div>
   </div>
 </div>
@@ -283,8 +299,6 @@ html, body {
 
 <!-- 2 — TIMELINE + SKILLS -->
 <div class="slide" id="s2">
-
-  <!-- LEFT: timeline -->
   <div class="tl-col">
     <div class="tl-list">
 
@@ -334,18 +348,13 @@ html, body {
     </div>
   </div>
 
-  <!-- RIGHT: circles -->
   <div class="sk-wrap">
     <div class="sk-label">Softwares</div>
     <div class="sk-grid" id="sk-grid"></div>
   </div>
-
 </div>
 
-<!-- slides 3+ injected by JS -->
-
 <script>
-// ── skills ─────────────────────────────────────────
 const SKS = [
   {n:'Figma',      l:'Fi', lv:'Avançado',      p:80},
   {n:'Lightroom',  l:'Lr', lv:'Avançado',      p:70},
@@ -373,34 +382,23 @@ document.getElementById('sk-grid').innerHTML = SKS.map(s=>`
     <div class="sk-lv">${s.lv}</div>
   </div>`).join('');
 
-// ── categories ─────────────────────────────────────
 const CATS = [
   {
     name: 'Fotografia de Arquitetura',
     imgs: [
-      'midias/fotos/1.png',
-      'midias/fotos/2.jpg',
-      'midias/fotos/3.jpg',
-      'midias/fotos/4.jpg',
-      'midias/fotos/5.jpg',
-      'midias/fotos/6.jpg',
-      'midias/fotos/7.jpg',
-      'midias/fotos/8.png',
-      'midias/fotos/9.png',
-      'midias/fotos/10.png',
-      'midias/fotos/11.jpg',
+      'midias/fotos/1.png','midias/fotos/2.jpg','midias/fotos/3.jpg',
+      'midias/fotos/4.jpg','midias/fotos/5.jpg','midias/fotos/6.jpg',
+      'midias/fotos/7.jpg','midias/fotos/8.png','midias/fotos/9.png',
+      'midias/fotos/10.png','midias/fotos/11.jpg',
     ],
     vids: ['midias/fotos/13videos.mov']
   },
   {
     name: '3D Render',
     imgs: [
-      'midias/3ds/1-3d-ia.png',
-      'midias/3ds/2-3ds-corona.png',
-      'midias/3ds/4-3ds-corona.jpg',
-      'midias/3ds/5-revit-ia.png',
-      'midias/3ds/6-revit-ia.png',
-      'midias/3ds/7-sketchup-d5.png',
+      'midias/3ds/1-3d-ia.png','midias/3ds/2-3ds-corona.png',
+      'midias/3ds/4-3ds-corona.jpg','midias/3ds/5-revit-ia.png',
+      'midias/3ds/6-revit-ia.png','midias/3ds/7-sketchup-d5.png',
       'midias/3ds/8-ketchup-d5.png',
     ]
   },
@@ -414,7 +412,6 @@ const CATS = [
   },
 ];
 
-// ── build slides array ─────────────────────────────
 const SLIDES = [
   {type:'fixed', id:'s0'},
   {type:'fixed', id:'s1'},
@@ -424,13 +421,12 @@ const SLIDES = [
 
 CATS.forEach(cat => {
   const hasContent = (cat.imgs && cat.imgs.length) || (cat.vids && cat.vids.length);
-  if(!hasContent) return; // skip empty categories
+  if(!hasContent) return;
   SLIDES.push({type:'cat', name: cat.name});
   (cat.imgs||[]).forEach(src => SLIDES.push({type:'img', src, cat: cat.name}));
   (cat.vids||[]).forEach(src => SLIDES.push({type:'vid', src, cat: cat.name}));
 });
 
-// ── inject dynamic slides ──────────────────────────
 const pad = n => String(n).padStart(2,'0');
 
 SLIDES.forEach((s, i) => {
@@ -476,7 +472,6 @@ SLIDES.forEach((s, i) => {
   document.body.appendChild(d);
 });
 
-// ── navigation ─────────────────────────────────────
 let cur = 0;
 
 function getEl(i){
@@ -486,11 +481,9 @@ function getEl(i){
   return document.getElementById('sd'+i);
 }
 
-// track per-cat image index for counter
 function getCatInfo(i){
   const s = SLIDES[i];
   if(s.type !== 'img') return null;
-  // count images in same category before i
   let idx = 0, total = 0;
   SLIDES.forEach((sl, j) => {
     if(sl.type === 'img' && sl.cat === s.cat){
@@ -514,6 +507,8 @@ function go(d){
   const av = arriving.querySelector('video');
   if(av){ av.currentTime = 0; av.play(); }
 
+  updateNm();
+
   if(cur === 2){
     document.querySelectorAll('.fi').forEach(e => { e.style.transition='none'; e.style.strokeDashoffset = C; });
     setTimeout(()=>{
@@ -534,8 +529,64 @@ function go(d){
   }
 }
 
-// final slide
 (()=>{
   const d = document.createElement('div');
   d.id = 'sd-end';
-  d.className = '
+  d.className = 'slide';
+  d.style.cssText = 'background:#fff;display:flex;align-items:center;justify-content:center;';
+  d.innerHTML = `
+    <div style="font-family:'Barlow',sans-serif;font-size:clamp(.85rem,1.3vw,1.2rem);font-weight:300;letter-spacing:.34em;text-transform:uppercase;color:#111;">Obrigado</div>
+    <button onclick="goTo(0)" class="btn-nav" style="bottom:2rem;right:2.8rem;background:none;border:none;font-family:'Space Mono',monospace;font-size:.46rem;font-weight:400;letter-spacing:.22em;text-transform:uppercase;color:#bbb;cursor:pointer;">página inicial</button>`;
+  document.body.appendChild(d);
+  SLIDES.push({type:'end'});
+})();
+
+function goTo(i){
+  if(i < 0 || i >= SLIDES.length) return;
+  const leaving = getEl(cur);
+  const v = leaving.querySelector('video');
+  if(v) v.pause();
+  leaving.classList.remove('on');
+  cur = i;
+  const arriving = getEl(cur);
+  arriving.classList.add('on');
+  const av = arriving.querySelector('video');
+  if(av){ av.currentTime = 0; av.play(); }
+  document.getElementById('ct').style.opacity = 0;
+  updateNm();
+  if(i === 2){
+    document.querySelectorAll('.fi').forEach(e => { e.style.transition='none'; e.style.strokeDashoffset = C; });
+    setTimeout(()=>{
+      document.querySelectorAll('.fi').forEach(e=>{
+        e.style.transition = 'stroke-dashoffset 1.4s cubic-bezier(.4,0,.2,1)';
+        e.style.strokeDashoffset = C - C * e.dataset.p / 100;
+      });
+    }, 80);
+  }
+}
+
+document.addEventListener('keydown', e => {
+  if(e.key === 'ArrowRight') go(+1);
+  if(e.key === 'ArrowLeft')  go(-1);
+});
+
+/* ── swipe / touch ── */
+let _tx = null;
+document.addEventListener('touchstart', e => { _tx = e.touches[0].clientX; }, {passive:true});
+document.addEventListener('touchend', e => {
+  if(_tx === null) return;
+  const dx = e.changedTouches[0].clientX - _tx;
+  _tx = null;
+  if(Math.abs(dx) < 30) return;
+  go(dx < 0 ? +1 : -1);
+}, {passive:true});
+
+/* ── mostra nome a partir do slide 1 ── */
+function updateNm(){
+  const nm = document.getElementById('nm');
+  if(cur > 0) nm.classList.add('show');
+  else nm.classList.remove('show');
+}
+</script>
+</body>
+</html>
