@@ -6,16 +6,14 @@
 <title>Alexandre Mares</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,700;0,900;1,300&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,300;0,400;0,700;0,800;1,300&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
   --ink: #111;
   --mid: #bbb;
-  --f-display: 'Barlow', sans-serif;
-  --f-body:    'Space Mono', monospace;
-  --f: var(--f-body);
+  --f:   'Archivo', sans-serif;
 }
 
 html, body {
@@ -26,7 +24,7 @@ html, body {
   color: var(--ink);
 }
 
-/* ── slides ── */
+/* ââ slides ââ */
 .slide {
   position: fixed; inset: 0;
   opacity: 0; pointer-events: none;
@@ -34,43 +32,39 @@ html, body {
 }
 .slide.on { opacity: 1; pointer-events: auto; }
 .slide.on .btn-nav {
-  position: absolute; z-index: 9200; pointer-events: auto;
+  position: absolute; z-index: 600; pointer-events: auto;
 }
 
-/* ── click zones ── */
+/* ââ click zones ââ */
 #zl, #zr {
-  position: fixed; top: 0; bottom: 0; width: 50%; z-index: 9000;
-  cursor: pointer; -webkit-tap-highlight-color: transparent;
-  touch-action: manipulation;
+  position: fixed; top: 0; bottom: 0; width: 50%; z-index: 500;
 }
-#zl { left: 0; }
-#zr { right: 0; }
+#zl { left: 0;  cursor: w-resize; }
+#zr { right: 0; cursor: e-resize; }
 
-/* ── fixed name top-left ── */
+/* ââ fixed name top-left ââ */
 #nm {
   position: fixed; top: 2rem; left: 2.8rem;
-  font-family: var(--f-body);
-  font-size: .58rem; font-weight: 400;
-  letter-spacing: .28em; text-transform: uppercase;
-  color: var(--ink); z-index: 9100; pointer-events: none;
+  font-size: .58rem; font-weight: 300;
+  letter-spacing: .28em;
+  color: var(--ink); z-index: 600; pointer-events: none;
   opacity: 0; transition: opacity .6s ease;
 }
 #nm.show { opacity: 1; }
 
-/* ── counter top-right ── */
+/* ââ counter top-right ââ */
 #ct {
   position: fixed; top: 2rem; right: 2.8rem;
-  font-family: var(--f-body);
-  font-size: .52rem; font-weight: 400;
+  font-size: .52rem; font-weight: 300;
   letter-spacing: .14em; color: var(--mid);
-  z-index: 9100; pointer-events: none;
+  z-index: 600; pointer-events: none;
   opacity: 0; transition: opacity .4s;
 }
 
-/* ════════════ 0 — CAPA ════════════ */
+/* ââââââââââââ 0 â CAPA (blank) ââââââââââââ */
 #s0 { background: #fff; }
 
-/* ════════════ 1 — DADOS ════════════ */
+/* ââââââââââââ 1 â DADOS ââââââââââââ */
 #s1 { background: #fff; }
 
 .d-wrap {
@@ -84,15 +78,15 @@ html, body {
   gap: 1.6rem;
 }
 .d-item {
-  font-family: var(--f-body);
-  font-size: .75rem; font-weight: 400;
+  font-size: .75rem; font-weight: 300;
   letter-spacing: .04em; color: var(--ink);
   line-height: 1;
 }
 
-/* ════════════ 2 — TIMELINE + SKILLS ════════════ */
+/* ââââââââââââ 2 â TIMELINE + SKILLS ââââââââââââ */
 #s2 { background: #fff; display: flex; align-items: stretch; }
 
+/* left â timeline */
 .tl-col {
   width: 46%;
   display: flex; align-items: center;
@@ -108,7 +102,6 @@ html, body {
 .tl-entry { display: grid; grid-template-columns: 68px 1fr; gap: 0 1rem; align-items: start; }
 
 .tl-year {
-  font-family: var(--f-body);
   font-size: .52rem; font-weight: 400;
   color: var(--mid); letter-spacing: .06em;
   padding-top: .22rem;
@@ -121,25 +114,23 @@ html, body {
   background: #ddd; flex-shrink: 0;
 }
 
+.tl-body {}
 .tl-title {
-  font-family: var(--f-display);
-  font-size: .78rem; font-weight: 700;
+  font-size: .78rem; font-weight: 800;
   letter-spacing: .01em; line-height: 1.2;
   margin-bottom: .18rem; color: var(--ink);
 }
 .tl-sub {
-  font-family: var(--f-body);
-  font-size: .52rem; font-weight: 400;
+  font-size: .58rem; font-weight: 300;
   color: var(--mid); margin-bottom: .55rem;
   letter-spacing: .02em;
 }
 .tl-desc {
-  font-family: var(--f-body);
-  font-size: .55rem; font-weight: 400;
+  font-size: .6rem; font-weight: 300;
   color: #999; line-height: 1.7;
 }
 
-/* right — circles */
+/* right â circles */
 .sk-wrap {
   flex: 1;
   display: flex; flex-direction: column;
@@ -148,8 +139,7 @@ html, body {
 }
 
 .sk-label {
-  font-family: var(--f-body);
-  font-size: .48rem; font-weight: 400;
+  font-size: .48rem; font-weight: 300;
   letter-spacing: .26em; text-transform: uppercase;
   color: var(--mid); margin-bottom: 2.5rem;
 }
@@ -185,24 +175,21 @@ html, body {
 .sk-c .lt {
   position: absolute; inset: 0;
   display: flex; align-items: center; justify-content: center;
-  font-family: var(--f-display);
-  font-size: 1.1rem; font-weight: 900;
+  font-size: 1.1rem; font-weight: 800;
   color: #ebebeb; user-select: none;
 }
 .sk-name {
-  font-family: var(--f-body);
   font-size: .5rem; font-weight: 700;
   letter-spacing: .1em; text-transform: uppercase;
   text-align: center; color: var(--ink);
 }
 .sk-lv {
-  font-family: var(--f-body);
-  font-size: .48rem; font-weight: 400;
+  font-size: .48rem; font-weight: 300;
   color: var(--mid); text-align: center;
   margin-top: -.2rem;
 }
 
-/* ════════════ sumário ════════════ */
+/* ââââââââââââ sumÃ¡rio ââââââââââââ */
 .s-summary {
   background: #fff;
   display: flex; align-items: flex-end; justify-content: flex-end;
@@ -210,8 +197,7 @@ html, body {
 }
 .sum-block { display: flex; flex-direction: column; gap: 2.8rem; }
 .sum-title {
-  font-family: var(--f-body);
-  font-size: .52rem; font-weight: 400;
+  font-size: .52rem; font-weight: 300;
   letter-spacing: .26em; text-transform: uppercase;
   color: var(--mid); margin-bottom: .8rem;
   font-style: italic;
@@ -220,58 +206,49 @@ html, body {
   display: grid; grid-template-columns: 1fr 1fr;
   gap: 1.6rem 4rem;
 }
+.sum-item { }
 .sum-num {
-  font-family: var(--f-body);
   font-size: .5rem; font-weight: 400;
   letter-spacing: .1em; color: var(--mid);
   margin-bottom: .3rem;
 }
 .sum-name {
-  font-family: var(--f-display);
   font-size: .82rem; font-weight: 300;
   color: var(--ink); letter-spacing: .02em;
   line-height: 1.2;
 }
 
-/* ════════════ category separator ════════════ */
+/* ââââââââââââ category separator ââââââââââââ */
 .s-cat {
   background: #fff;
   display: flex; align-items: center;
   padding-left: 8vw;
 }
 .cat-name {
-  font-family: var(--f-display);
   font-size: clamp(.9rem, 1.8vw, 1.6rem);
   font-weight: 300; letter-spacing: .18em;
   text-transform: uppercase; color: var(--ink);
 }
-.cat-name b { font-weight: 900; }
+.cat-name b { font-weight: 800; }
 
-/* ════════════ photos ════════════ */
+/* ââââââââââââ photos ââââââââââââ */
 .s-ph {
   display: flex; align-items: center; justify-content: center;
-  background: #fff;
+  background: #fff; padding: 4rem 5vw;
 }
-.s-ph img { width: 100%; height: 100%; object-fit: contain; }
+.s-ph img { max-width: 100%; max-height: 100%; object-fit: contain; }
+.s-ph.dark { background: #000; }
 
-/* ════════════ video ════════════ */
+/* ââââââââââââ video ââââââââââââ */
 .s-vid {
   display: flex; align-items: center; justify-content: center;
   background: #fff;
 }
 .s-vid video {
-  width: 100%; height: 100%;
-  object-fit: contain; outline: none;
-}
-
-/* ════════════ youtube ════════════ */
-.s-yt {
-  display: flex; align-items: center; justify-content: center;
-  background: #000;
-}
-.s-yt iframe {
-  width: 100%; height: 100%;
-  border: none; display: block;
+  height: 82vh;
+  width: calc(82vh * (9 / 16));
+  object-fit: cover;
+  display: block; outline: none;
 }
 </style>
 </head>
@@ -279,19 +256,19 @@ html, body {
 
 <div id="nm">Alexandre Mares</div>
 <div id="ct"></div>
-<div id="zl"></div>
-<div id="zr"></div>
+<div id="zl" onclick="go(-1)"></div>
+<div id="zr" onclick="go(+1)"></div>
 
-<!-- 0 — CAPA -->
+<!-- 0 â CAPA -->
 <div class="slide on" id="s0">
   <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
-    <div style="font-family:'Barlow',sans-serif;font-size:clamp(.85rem,1.3vw,1.2rem);font-weight:300;letter-spacing:.34em;text-transform:uppercase;color:#111;">
-      <b style="font-weight:900;">Alexandre</b> Mares
+    <div style="font-size:clamp(.85rem,1.3vw,1.2rem);font-weight:300;letter-spacing:.34em;text-transform:uppercase;color:#111;">
+      Alexandre Mares
     </div>
   </div>
 </div>
 
-<!-- 1 — DADOS -->
+<!-- 1 â DADOS -->
 <div class="slide" id="s1">
   <div class="d-wrap" style="display:flex;align-items:center;gap:5vw;">
     <div style="flex-shrink:0;width:clamp(140px,16vw,220px);aspect-ratio:3/4;overflow:hidden;background:#111;">
@@ -300,15 +277,17 @@ html, body {
     </div>
     <div class="d-list">
       <div class="d-item">26 anos</div>
-      <div class="d-item">Brasília, DF</div>
+      <div class="d-item">BrasÃ­lia, DF</div>
       <div class="d-item">alexandremaressguia@gmail.com</div>
       <div class="d-item">+55 (61) 98175-0930</div>
     </div>
   </div>
 </div>
 
-<!-- 2 — TIMELINE + SKILLS -->
+<!-- 2 â TIMELINE + SKILLS -->
 <div class="slide" id="s2">
+
+  <!-- LEFT: timeline -->
   <div class="tl-col">
     <div class="tl-list">
 
@@ -316,8 +295,8 @@ html, body {
         <div class="tl-year">2022</div>
         <div class="tl-body">
           <div class="tl-title">Arquitetura e Urbanismo</div>
-          <div class="tl-sub">Graduação em andamento · 6º semestre</div>
-          <div class="tl-desc">Foco em projeto arquitetônico, representação técnica e visualização. Desenvolvimento de repertório visual e domínio progressivo de ferramentas de modelagem, render e comunicação de projeto.</div>
+          <div class="tl-sub">GraduaÃ§Ã£o em andamento Â· 6Âº semestre</div>
+          <div class="tl-desc">Foco em projeto arquitetÃ´nico, representaÃ§Ã£o tÃ©cnica e visualizaÃ§Ã£o. Desenvolvimento de repertÃ³rio visual e domÃ­nio progressivo de ferramentas de modelagem, render e comunicaÃ§Ã£o de projeto.</div>
         </div>
       </div>
 
@@ -325,7 +304,7 @@ html, body {
         <div class="tl-year">2022</div>
         <div class="tl-body">
           <div class="tl-title">Revit Master</div>
-          <div class="tl-sub">Curso · 144 horas</div>
+          <div class="tl-sub">Curso Â· 144 horas</div>
         </div>
       </div>
 
@@ -333,49 +312,54 @@ html, body {
         <div class="tl-year">2024</div>
         <div class="tl-body">
           <div class="tl-title">Casulo Arquitetura</div>
-          <div class="tl-sub">Estágio em Arquitetura · Brasília, DF</div>
-          <div class="tl-desc">Desenvolvimento de projetos residenciais e comerciais, da concepção ao detalhamento técnico. Produção de pranchas, documentação e modelagem 3D. Vivência prática em escritório com fluxo real de projeto.</div>
+          <div class="tl-sub">EstÃ¡gio em Arquitetura Â· BrasÃ­lia, DF</div>
+          <div class="tl-desc">Desenvolvimento de projetos residenciais e comerciais, da concepÃ§Ã£o ao detalhamento tÃ©cnico. ProduÃ§Ã£o de pranchas, documentaÃ§Ã£o e modelagem 3D. VivÃªncia prÃ¡tica em escritÃ³rio com fluxo real de projeto.</div>
         </div>
       </div>
 
       <div class="tl-entry">
         <div class="tl-year">2025</div>
         <div class="tl-body">
-          <div class="tl-title">Agência Mares</div>
-          <div class="tl-sub">Estágio em Direção Visual · São Paulo, SP</div>
-          <div class="tl-desc">Criação visual, produção fotográfica e audiovisual para marcas e clientes. Identidades visuais, campanhas e conteúdo estratégico. Uso de IA aplicada à geração e tratamento de imagens e vídeos.</div>
+          <div class="tl-title">AgÃªncia Mares</div>
+          <div class="tl-sub">EstÃ¡gio em DireÃ§Ã£o Visual Â· SÃ£o Paulo, SP</div>
+          <div class="tl-desc">CriaÃ§Ã£o visual, produÃ§Ã£o fotogrÃ¡fica e audiovisual para marcas e clientes. Identidades visuais, campanhas e conteÃºdo estratÃ©gico. Uso de IA aplicada Ã  geraÃ§Ã£o e tratamento de imagens e vÃ­deos.</div>
         </div>
       </div>
 
       <div class="tl-entry">
         <div class="tl-year">2025</div>
         <div class="tl-body">
-          <div class="tl-title">3DS Max + Corona — Ander Alencar</div>
-          <div class="tl-sub">Curso · 100 horas</div>
+          <div class="tl-title">3DS Max + Corona â Ander Alencar</div>
+          <div class="tl-sub">Curso Â· 100 horas</div>
         </div>
       </div>
 
     </div>
   </div>
 
+  <!-- RIGHT: circles -->
   <div class="sk-wrap">
     <div class="sk-label">Softwares</div>
     <div class="sk-grid" id="sk-grid"></div>
   </div>
+
 </div>
 
+<!-- slides 3+ injected by JS -->
+
 <script>
+// ââ skills âââââââââââââââââââââââââââââââââââââââââ
 const SKS = [
-  {n:'Figma',      l:'Fi', lv:'Avançado',      p:80},
-  {n:'Lightroom',  l:'Lr', lv:'Avançado',      p:70},
-  {n:'Photoshop',  l:'Ps', lv:'Intermediário', p:50},
-  {n:'AutoCAD',    l:'Ac', lv:'Avançado',      p:80},
-  {n:'Revit',      l:'Rv', lv:'Avançado',      p:80},
-  {n:'SketchUp',   l:'Su', lv:'Avançado',      p:80},
-  {n:'3DS+Corona', l:'3D', lv:'Intermediário', p:60},
-  {n:'IA / Node',  l:'Ia', lv:'Avançado',      p:80},
-  {n:'CapCut',     l:'Cc', lv:'Avançado',      p:80},
-  {n:'D5 Render',  l:'D5', lv:'Avançado',      p:75},
+  {n:'Figma',      l:'Fi', lv:'AvanÃ§ado',      p:80},
+  {n:'Lightroom',  l:'Lr', lv:'AvanÃ§ado',      p:70},
+  {n:'Photoshop',  l:'Ps', lv:'IntermediÃ¡rio', p:50},
+  {n:'AutoCAD',    l:'Ac', lv:'AvanÃ§ado',      p:80},
+  {n:'Revit',      l:'Rv', lv:'AvanÃ§ado',      p:80},
+  {n:'SketchUp',   l:'Su', lv:'AvanÃ§ado',      p:80},
+  {n:'3DS+Corona', l:'3D', lv:'IntermediÃ¡rio', p:60},
+  {n:'IA / Node',  l:'Ia', lv:'AvanÃ§ado',      p:80},
+  {n:'CapCut',     l:'Cc', lv:'AvanÃ§ado',      p:80},
+  {n:'D5 Render',  l:'D5', lv:'AvanÃ§ado',      p:75},
 ];
 
 const C = 226;
@@ -392,36 +376,48 @@ document.getElementById('sk-grid').innerHTML = SKS.map(s=>`
     <div class="sk-lv">${s.lv}</div>
   </div>`).join('');
 
+// ââ categories âââââââââââââââââââââââââââââââââââââ
 const CATS = [
   {
     name: 'Fotografia de Arquitetura',
     imgs: [
-      'midias/fotos/1.jpg','midias/fotos/2.jpg','midias/fotos/3.jpg',
-      'midias/fotos/4.jpg','midias/fotos/5.jpg','midias/fotos/6.jpg',
-      'midias/fotos/7.jpg','midias/fotos/8.jpg','midias/fotos/9.jpg',
-      'midias/fotos/10.jpg','midias/fotos/11.jpg',
+      'midias/fotos/1.png',
+      'midias/fotos/2.jpg',
+      'midias/fotos/3.jpg',
+      'midias/fotos/4.jpg',
+      'midias/fotos/5.jpg',
+      'midias/fotos/6.jpg',
+      'midias/fotos/7.jpg',
+      'midias/fotos/8.png',
+      'midias/fotos/9.png',
+      {src:'midias/fotos/10.png', dark:true},
+      'midias/fotos/11.jpg',
     ],
-    ytvids: ['HZQ65R2iILU']
+    vids: ['midias/fotos/13videos.mp4']
   },
   {
     name: '3D Render',
     imgs: [
-      'midias/3ds/1-3d-ia.jpg','midias/3ds/2-3ds-corona.jpg',
-      'midias/3ds/4-3ds-corona.jpg','midias/3ds/5-revit-ia.jpg',
-      'midias/3ds/6-revit-ia.jpg','midias/3ds/7-sketchup-d5.jpg',
-      'midias/3ds/8-ketchup-d5.jpg',
+      'midias/3ds/1-3d-ia.png',
+      'midias/3ds/2-3ds-corona.png',
+      'midias/3ds/4-3ds-corona.jpg',
+      'midias/3ds/5-revit-ia.png',
+      'midias/3ds/6-revit-ia.png',
+      'midias/3ds/7-sketchup-d5.png',
+      'midias/3ds/8-ketchup-d5.png',
     ]
   },
   {
     name: 'Projetos',
     imgs: [
-      'midias/projetos/magnific_photo-a-modern-skyscraper_swfHCAGl8e.jpg',
+      'midias/projetos/magnific_photo-a-modern-skyscraper_swfHCAGl8e.png',
       'midias/projetos/IMG_8582.jpg',
-      'midias/projetos/magnific_photo-a-modern-building-w_l7CqQMNgv9.jpg',
+      'midias/projetos/magnific_photo-a-modern-building-w_l7CqQMNgv9.png',
     ]
   },
 ];
 
+// ââ build slides array âââââââââââââââââââââââââââââ
 const SLIDES = [
   {type:'fixed', id:'s0'},
   {type:'fixed', id:'s1'},
@@ -430,14 +426,17 @@ const SLIDES = [
 ];
 
 CATS.forEach(cat => {
-  const hasContent = (cat.imgs && cat.imgs.length) || (cat.vids && cat.vids.length) || (cat.ytvids && cat.ytvids.length);
+  const hasContent = (cat.imgs && cat.imgs.length) || (cat.vids && cat.vids.length);
   if(!hasContent) return;
   SLIDES.push({type:'cat', name: cat.name});
-  (cat.imgs||[]).forEach(src => SLIDES.push({type:'img', src, cat: cat.name}));
+  (cat.imgs||[]).forEach(item => {
+    if(typeof item === 'string') SLIDES.push({type:'img', src:item, cat: cat.name});
+    else SLIDES.push({type:'img', src:item.src, dark:item.dark, cat: cat.name});
+  });
   (cat.vids||[]).forEach(src => SLIDES.push({type:'vid', src, cat: cat.name}));
-  (cat.ytvids||[]).forEach(id => SLIDES.push({type:'yt', id, cat: cat.name}));
 });
 
+// ââ inject dynamic slides ââââââââââââââââââââââââââ
 const pad = n => String(n).padStart(2,'0');
 
 SLIDES.forEach((s, i) => {
@@ -470,7 +469,7 @@ SLIDES.forEach((s, i) => {
     d.innerHTML = `<div class="cat-name">${parts.join(' ')} <b>${last}</b></div>`;
   }
   else if(s.type === 'img'){
-    d.className = 'slide s-ph';
+    d.className = 'slide s-ph' + (s.dark ? ' dark' : '');
     d.innerHTML = `<img src="${s.src}" loading="lazy">`;
   }
   else if(s.type === 'vid'){
@@ -479,15 +478,11 @@ SLIDES.forEach((s, i) => {
     const vid = d.querySelector('video');
     vid.addEventListener('ended', () => go(+1));
   }
-  else if(s.type === 'yt'){
-    d.className = 'slide s-yt';
-    d.dataset.ytid = s.id;
-    d.innerHTML = ``;
-  }
 
   document.body.appendChild(d);
 });
 
+// ââ navigation âââââââââââââââââââââââââââââââââââââ
 let cur = 0;
 
 function getEl(i){
@@ -510,32 +505,18 @@ function getCatInfo(i){
   return {cat: s.cat, idx: idx+1, total};
 }
 
-function ytUnload(el){
-  const fr = el.querySelector('iframe');
-  if(fr) fr.src = '';
-}
-function ytLoad(el){
-  const id = el.dataset.ytid;
-  if(!id) return;
-  el.innerHTML = `<iframe src="https://www.youtube.com/embed/${id}?autoplay=1&loop=1&playlist=${id}&rel=0&modestbranding=1" allow="autoplay; fullscreen" allowfullscreen></iframe>`;
-}
-
 function go(d){
   const nx = cur + d;
   if(nx < 0 || nx >= SLIDES.length) return;
   const leaving = getEl(cur);
   const v = leaving.querySelector('video');
   if(v) v.pause();
-  ytUnload(leaving);
   leaving.classList.remove('on');
   cur = nx;
   const arriving = getEl(cur);
   arriving.classList.add('on');
   const av = arriving.querySelector('video');
-  if(av){ av.currentTime = 0; av.play(); }
-  ytLoad(arriving);
-
-  updateNm();
+  if(av){ av.currentTime = 0; av.play().catch(()=>{ av.controls = true; }); }
 
   if(cur === 2){
     document.querySelectorAll('.fi').forEach(e => { e.style.transition='none'; e.style.strokeDashoffset = C; });
@@ -555,54 +536,50 @@ function go(d){
   } else {
     ct.style.opacity = 0;
   }
-}
 
-(()=>{
-  const d = document.createElement('div');
-  d.id = 'sd-end';
-  d.className = 'slide';
-  d.style.cssText = 'background:#fff;display:flex;align-items:center;justify-content:center;';
-  d.innerHTML = `
-    <div style="font-family:'Barlow',sans-serif;font-size:clamp(.85rem,1.3vw,1.2rem);font-weight:300;letter-spacing:.34em;text-transform:uppercase;color:#111;">Obrigado</div>
-    <button onclick="goTo(0)" class="btn-nav" style="bottom:2rem;right:2.8rem;background:none;border:none;font-family:'Space Mono',monospace;font-size:.46rem;font-weight:400;letter-spacing:.22em;text-transform:uppercase;color:#bbb;cursor:pointer;">página inicial</button>`;
-  document.body.appendChild(d);
-  SLIDES.push({type:'end'});
-})();
+  updateNm();
+}
 
 function goTo(i){
   if(i < 0 || i >= SLIDES.length) return;
   const leaving = getEl(cur);
   const v = leaving.querySelector('video');
   if(v) v.pause();
-  ytUnload(leaving);
   leaving.classList.remove('on');
   cur = i;
   const arriving = getEl(cur);
   arriving.classList.add('on');
   const av = arriving.querySelector('video');
-  if(av){ av.currentTime = 0; av.play(); }
-  ytLoad(arriving);
+  if(av){ av.currentTime = 0; av.play().catch(()=>{ av.controls = true; }); }
   document.getElementById('ct').style.opacity = 0;
   updateNm();
-  if(i === 2){
-    document.querySelectorAll('.fi').forEach(e => { e.style.transition='none'; e.style.strokeDashoffset = C; });
-    setTimeout(()=>{
-      document.querySelectorAll('.fi').forEach(e=>{
-        e.style.transition = 'stroke-dashoffset 1.4s cubic-bezier(.4,0,.2,1)';
-        e.style.strokeDashoffset = C - C * e.dataset.p / 100;
-      });
-    }, 80);
-  }
 }
 
 function updateNm(){
   const nm = document.getElementById('nm');
-  if(cur > 0) nm.classList.add('show');
-  else nm.classList.remove('show');
+  const s = SLIDES[cur];
+  if(cur > 0 && s.type !== 'cat' && cur !== 2){
+    nm.classList.add('show');
+    nm.style.color = s.dark ? 'var(--mid)' : 'var(--ink)';
+  } else {
+    nm.classList.remove('show');
+    nm.style.color = '';
+  }
 }
 
-document.getElementById('zl').addEventListener('click', () => go(-1));
-document.getElementById('zr').addEventListener('click', () => go(+1));
+// final slide
+(()=>{
+  const d = document.createElement('div');
+  d.id = 'sd-end';
+  d.className = 'slide';
+  d.style.cssText = 'background:#fff;display:flex;align-items:center;justify-content:center;';
+  d.innerHTML = `
+    <div style="font-size:clamp(.85rem,1.3vw,1.2rem);font-weight:300;letter-spacing:.34em;text-transform:uppercase;color:#111;">Obrigado</div>
+    <button onclick="goTo(0)" class="btn-nav" style="bottom:2rem;right:2.8rem;background:none;border:none;font-size:.46rem;font-weight:300;letter-spacing:.22em;text-transform:uppercase;color:#bbb;cursor:pointer;position:absolute;">pÃ¡gina inicial</button>`;
+  document.body.appendChild(d);
+  SLIDES.push({type:'end'});
+})();
+
 document.addEventListener('keydown', e => {
   if(e.key === 'ArrowRight' || e.key === 'ArrowDown') go(+1);
   if(e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   go(-1);
