@@ -260,8 +260,142 @@ html, body {
   object-fit: cover;
   display: block; outline: none;
 }
+
+/* ════════════ youtube embed ════════════ */
+.s-yt {
+  display: flex; align-items: center; justify-content: center;
+  background: #000;
+}
+.yt-wrap {
+  height: 82vh;
+  width: calc(82vh * (9 / 16));
+  position: relative;
+}
+.yt-wrap iframe {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%; border: none;
+}
+
+/* ════════════ slide 1 — layout base ════════════ */
+.d-wrap {
+  display: flex;
+  align-items: center;
+  gap: 5vw;
+}
+.d-photo {
+  flex-shrink: 0;
+  width: clamp(140px, 16vw, 220px);
+  aspect-ratio: 3/4;
+  overflow: hidden;
+  background: #111;
+}
+
+/* ════════════ MOBILE ════════════ */
 @media (max-width: 768px) {
+
+  /* chrome */
+  #nm { font-size: .75rem; top: 1.3rem; left: 1.5rem; letter-spacing: .18em; }
+  #ct { font-size: .7rem;  top: 1.3rem; right: 1.5rem; }
+
+  /* capa e final */
+  #s0 > div > div { font-size: clamp(1rem, 5vw, 1.4rem) !important; letter-spacing: .22em !important; }
+
+  /* slide 1 — dados */
+  .d-wrap {
+    left: 50%;
+    transform: translate(-50%, -50%);
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    width: 82vw;
+    text-align: center;
+  }
+  .d-photo { width: clamp(90px, 30vw, 150px); }
+  .d-list  { align-items: center; }
+  .d-item  { font-size: .95rem; }
+
+  /* slide 2 — timeline + skills */
+  #s2 {
+    flex-direction: column;
+    align-items: stretch;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+  }
+
+  /* — timeline — */
+  .tl-col {
+    width: 100%;
+    padding: 5rem 8vw 2rem;
+    border-right: none;
+    border-bottom: 1px solid #efefef;
+  }
+  .tl-list  { gap: 0; }
+
+  /* cada entrada: layout de linha com separador */
+  .tl-entry {
+    display: grid;
+    grid-template-columns: 1fr;
+    padding: 1.3rem 0;
+    border-bottom: 1px solid #f4f4f4;
+    position: static;
+  }
+  .tl-entry:last-child { border-bottom: none; }
+
+  /* ano vira tag inline acima do título */
+  .tl-year {
+    font-size: .52rem;
+    color: var(--mid);
+    letter-spacing: .1em;
+    margin-bottom: .3rem;
+    display: block;
+    white-space: nowrap;
+  }
+  .tl-year::after { display: none; }
+
+  .tl-title { font-size: .84rem; margin-bottom: .2rem; }
+  .tl-sub   { font-size: .65rem; margin-bottom: 0; }
+  .tl-desc  { display: none; }
+
+  /* — skills — */
+  .sk-wrap  { padding: 2.5rem 8vw 4rem; }
+  .sk-label { font-size: .58rem; margin-bottom: 1.8rem; letter-spacing: .22em; }
+
+  .sk-grid  {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    row-gap: 1.8rem;
+    column-gap: 0;
+    width: 100%;
+  }
+
+  .sk-item  { gap: .4rem; }
+  .sk-c     { width: 54px; height: 54px; }
+  .sk-c svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .sk-c .lt { font-size: .7rem; }
+  .sk-name  { font-size: .6rem; letter-spacing: .06em; }
+  .sk-lv    { display: none; }
+
+  /* sumário */
+  .s-summary { align-items: center; justify-content: center; padding: 0 8vw; }
+  .sum-block  { gap: 2rem; }
+  .sum-list   { grid-template-columns: 1fr; gap: 1.2rem; }
+  .sum-title  { font-size: .65rem; }
+  .sum-num    { font-size: .62rem; }
+  .sum-name   { font-size: 1rem; }
+
+  /* separador de categoria */
+  .s-cat    { padding-left: 8vw; }
+  .cat-name { font-size: clamp(1.1rem, 6vw, 2.4rem); }
+
+  /* video — retrato */
   .s-vid video { width: min(90vw, calc(88vh * (720 / 1314))); height: auto; max-height: 88vh; }
+
+  /* youtube — retrato */
+  .yt-wrap { width: min(90vw, calc(88vh * (9 / 16))); height: auto; aspect-ratio: 9/16; max-height: 88vh; }
+
+  /* zonas de clique: desativadas no mobile — navegação via swipe */
+  #zl, #zr { pointer-events: none; }
 }
 </style>
 </head>
@@ -283,8 +417,8 @@ html, body {
 
 <!-- 1 — DADOS -->
 <div class="slide" id="s1">
-  <div class="d-wrap" style="display:flex;align-items:center;gap:5vw;">
-    <div style="flex-shrink:0;width:clamp(140px,16vw,220px);aspect-ratio:3/4;overflow:hidden;background:#111;">
+  <div class="d-wrap">
+    <div class="d-photo">
       <img src="midias/capa/capa.jpg"
         style="width:100%;height:100%;object-fit:cover;filter:grayscale(1);display:block;">
     </div>
@@ -308,7 +442,7 @@ html, body {
         <div class="tl-year">2022</div>
         <div class="tl-body">
           <div class="tl-title">Arquitetura e Urbanismo</div>
-          <div class="tl-sub">Graduação em andamento · 6º semestre</div>
+          <div class="tl-sub">Graduação em andamento · 6B� semestre</div>
           <div class="tl-desc">Foco em projeto arquitetônico, representação técnica e visualização. Desenvolvimento de repertório visual e domínio progressivo de ferramentas de modelagem, render e comunicação de projeto.</div>
         </div>
       </div>
@@ -390,6 +524,7 @@ document.getElementById('sk-grid').innerHTML = SKS.map(s=>`
   </div>`).join('');
 
 // ── categories ─────────────────────────────────────
+// Mídia: aponta para midias/ (pasta original na raiz do portfolio)
 const CATS = [
   {
     name: 'Fotografia de Arquitetura',
@@ -406,7 +541,8 @@ const CATS = [
       {src:'midias/fotos/10.png', dark:true},
       'midias/fotos/11.jpg',
     ],
-    vids: ['midias/fotos/video.mp4']
+    vids: ['midias/fotos/13videos.mp4'],
+    yts: ['HZQ65R2iILU']
   },
   {
     name: '3D Render',
@@ -443,33 +579,7 @@ CATS.forEach(cat => {
   if(!hasContent) return;
   SLIDES.push({type:'cat', name: cat.name});
   (cat.imgs||[]).forEach(item => {
-    if(typeof item === 'string') SLIDES.push({type:'img', src:item, cat: cat.name});
-    else SLIDES.push({type:'img', src:item.src, dark:item.dark, cat: cat.name});
-  });
-  (cat.vids||[]).forEach(src => SLIDES.push({type:'vid', src, cat: cat.name}));
-});
-
-// ── inject dynamic slides ──────────────────────────
-const pad = n => String(n).padStart(2,'0');
-
-SLIDES.forEach((s, i) => {
-  if(s.type === 'fixed') return;
-  const d = document.createElement('div');
-  d.id = 'sd'+i;
-
-  if(s.type === 'summary'){
-    d.className = 'slide s-summary';
-    const filteredCats = CATS.filter(c=>(c.imgs&&c.imgs.length)||(c.vids&&c.vids.length));
-    d.innerHTML = `
-      <div class="sum-block">
-        <div class="sum-title">Trabalhos selecionados</div>
-        <div class="sum-list">
-          ${filteredCats.map((c,ci)=>{
-            const catIdx = SLIDES.findIndex(sl => sl.type === 'cat' && sl.name === c.name);
-            return `
-              <div class="sum-item btn-nav" onclick="goTo(${catIdx})" style="cursor:pointer;position:relative;">
-                <div class="sum-num">0${ci+1}.</div>
-                <div class="sum-name">${c.name}</div>
+    if(typeof item === 'string') SLIDES.push({type:'name}</div>
               </div>`;
           }).join('')}
         </div>
@@ -491,6 +601,10 @@ SLIDES.forEach((s, i) => {
     const vid = d.querySelector('video');
     vid.addEventListener('ended', () => go(+1));
   }
+  else if(s.type === 'yt'){
+    d.className = 'slide s-yt';
+    d.innerHTML = `<div class="yt-wrap"><div id="yt-player-${i}"></div></div>`;
+  }
 
   document.body.appendChild(d);
 });
@@ -505,7 +619,7 @@ function getEl(i){
   return document.getElementById('sd'+i);
 }
 
-function getCatInfo(i){
+function getCatInfo(t){
   const s = SLIDES[i];
   if(s.type !== 'img') return null;
   let idx = 0, total = 0;
@@ -524,12 +638,15 @@ function go(d){
   const leaving = getEl(cur);
   const v = leaving.querySelector('video');
   if(v) v.pause();
+  if(SLIDES[cur] && SLIDES[cur].type === 'yt'){ const p = ytPlayers[cur]; if(p && p.pauseVideo) p.pauseVideo(); }
   leaving.classList.remove('on');
   cur = nx;
   const arriving = getEl(cur);
   arriving.classList.add('on');
+  if(cur === 2) arriving.scrollTop = 0;
   const av = arriving.querySelector('video');
   if(av){ av.currentTime = 0; av.play().catch(()=>{ av.controls = true; }); }
+  if(SLIDES[cur] && SLIDES[cur].type === 'yt'){ const p = ytPlayers[cur]; if(p && p.playVideo) p.playVideo(); }
 
   if(cur === 2){
     document.querySelectorAll('.fi').forEach(e => { e.style.transition='none'; e.style.strokeDashoffset = C; });
@@ -558,12 +675,15 @@ function goTo(i){
   const leaving = getEl(cur);
   const v = leaving.querySelector('video');
   if(v) v.pause();
+  if(SLIDES[cur] && SLIDES[cur].type === 'yt'){ const p = ytPlayers[cur]; if(p && p.pauseVideo) p.pauseVideo(); }
   leaving.classList.remove('on');
   cur = i;
   const arriving = getEl(cur);
   arriving.classList.add('on');
+  if(cur === 2) arriving.scrollTop = 0;
   const av = arriving.querySelector('video');
   if(av){ av.currentTime = 0; av.play().catch(()=>{ av.controls = true; }); }
+  if(SLIDES[cur] && SLIDES[cur].type === 'yt'){ const p = ytPlayers[cur]; if(p && p.playVideo) p.playVideo(); }
   document.getElementById('ct').style.opacity = 0;
   updateNm();
 }
@@ -588,4 +708,54 @@ function updateNm(){
   d.style.cssText = 'background:#fff;display:flex;align-items:center;justify-content:center;';
   d.innerHTML = `
     <div style="font-size:clamp(.85rem,1.3vw,1.2rem);font-weight:300;letter-spacing:.34em;text-transform:uppercase;color:#111;">Obrigado</div>
-    <button onclick="goTo(0)" class="btn-nav" style="bottom:2rem;right:2.8rem;background
+    <button onclick="goTo(0)" class="btn-nav" style="bottom:2rem;right:2.8rem;background:none;border:none;font-size:.46rem;font-weight:300;letter-spacing:.22em;text-transform:uppercase;color:#bbb;cursor:pointer;position:absolute;">página inicial</button>`;
+  document.body.appendChild(d);
+  SLIDES.push({type:'end'});
+})();
+
+document.addEventListener('keydown', e => {
+  if(e.key === 'ArrowRight' || e.key === 'ArrowDown') go(+1);
+  if(e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   go(-1);
+});
+
+// ── swipe (mobile) ──────────────────────────────────
+let _tx = 0, _ty = 0;
+document.addEventListener('touchstart', e => {
+  _tx = e.touches[0].clientX;
+  _ty = e.touches[0].clientY;
+}, {passive: true});
+document.addEventListener('touchend', e => {
+  const dx = e.changedTouches[0].clientX - _tx;
+  const dy = e.changedTouches[0].clientY - _ty;
+  // só navega se o swipe horizontal for dominante e significativo
+  if(Math.abs(dx) > Math.abs(dy) * 1.5 && Math.abs(dx) > 35) {
+    go(dx < 0 ? +1 : -1);
+  }
+}, {passive: true});
+
+// ── YouTube IFrame API ──────────────────────────────
+const ytPlayers = {};
+
+window.onYouTubeIframeAPIReady = function(){
+  SLIDES.forEach((s, i) => {
+    if(s.type !== 'yt') return;
+    ytPlayers[i] = new YT.Player('yt-player-' + i, {
+      videoId: s.id,
+      playerVars: { playsinline: 1, controls: 1, rel: 0, modestbranding: 1 },
+      events: {
+        onStateChange: function(e){
+          if(e.data === YT.PlayerState.ENDED) go(+1);
+        }
+      }
+    });
+  });
+};
+
+(function(){
+  var tag = document.createElement('script');
+  tag.src = 'https://www.youtube.com/iframe_api';
+  document.head.appendChild(tag);
+})();
+</script>
+</body>
+</html>
