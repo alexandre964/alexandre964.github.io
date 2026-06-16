@@ -36,12 +36,13 @@ html, body {
   position: absolute; z-index: 600; pointer-events: auto;
 }
 
-/* ── click zones ── */
+/* ── click zones (apenas cursor — clique tratado via document listener) ── */
 #zl, #zr {
-  position: fixed; top: 0; bottom: 0; width: 50%; z-index: 500;
+  position: fixed; top: 0; bottom: 0; width: 50%; z-index: 1;
+  pointer-events: none;
 }
-#zl { left: 0;  cursor: w-resize; }
-#zr { right: 0; cursor: e-resize; }
+#zl { left: 0; }
+#zr { right: 0; }
 
 /* ── fixed name top-left ── */
 #nm {
@@ -403,8 +404,8 @@ html, body {
 
 <div id="nm">Alexandre Mares</div>
 <div id="ct"></div>
-<div id="zl" onclick="go(-1)"></div>
-<div id="zr" onclick="go(+1)"></div>
+<div id="zl"></div>
+<div id="zr"></div>
 
 <!-- 0 — CAPA -->
 <div class="slide on" id="s0">
@@ -442,7 +443,7 @@ html, body {
         <div class="tl-year">2022</div>
         <div class="tl-body">
           <div class="tl-title">Arquitetura e Urbanismo</div>
-          <div class="tl-sub">Graduação em andamento · 6B� semestre</div>
+          <div class="tl-sub">Graduação em andamento · 6º semestre</div>
           <div class="tl-desc">Foco em projeto arquitetônico, representação técnica e visualização. Desenvolvimento de repertório visual e domínio progressivo de ferramentas de modelagem, render e comunicação de projeto.</div>
         </div>
       </div>
@@ -579,7 +580,34 @@ CATS.forEach(cat => {
   if(!hasContent) return;
   SLIDES.push({type:'cat', name: cat.name});
   (cat.imgs||[]).forEach(item => {
-    if(typeof item === 'string') SLIDES.push({type:'name}</div>
+    if(typeof item === 'string') SLIDES.push({type:'img', src:item, cat: cat.name});
+    else SLIDES.push({type:'img', src:item.src, dark:item.dark, cat: cat.name});
+  });
+  (cat.vids||[]).forEach(src => SLIDES.push({type:'vid', src, cat: cat.name}));
+  (cat.yts||[]).forEach(id => SLIDES.push({type:'yt', id, cat: cat.name}));
+});
+
+// ── inject dynamic slides ──────────────────────────
+const pad = n => String(n).padStart(2,'0');
+
+SLIDES.forEach((s, i) => {
+  if(s.type === 'fixed') return;
+  const d = document.createElement('div');
+  d.id = 'sd'+i;
+
+  if(s.type === 'summary'){
+    d.className = 'slide s-summary';
+    const filteredCats = CATS.filter(c=>(c.imgs&&c.imgs.length)||(c.vids&&c.vids.length));
+    d.innerHTML = `
+      <div class="sum-block">
+        <div class="sum-title">Trabalhos selecionados</div>
+        <div class="sum-list">
+          ${filteredCats.map((c,ci)=>{
+            const catIdx = SLIDES.findIndex(sl => sl.type === 'cat' && sl.name === c.name);
+            return `
+              <div class="sum-item btn-nav" onclick="event.stopPropagation();goTo(${catIdx})" style="cursor:pointer;position:relative;">
+                <div class="sum-num">0${ci+1}.</div>
+                <div class="sum-name">${c.name}</div>
               </div>`;
           }).join('')}
         </div>
@@ -619,7 +647,7 @@ function getEl(i){
   return document.getElementById('sd'+i);
 }
 
-function getCatInfo(t){
+function getCatInfo(i){
   const s = SLIDES[i];
   if(s.type !== 'img') return null;
   let idx = 0, total = 0;
@@ -708,7 +736,7 @@ function updateNm(){
   d.style.cssText = 'background:#fff;display:flex;align-items:center;justify-content:center;';
   d.innerHTML = `
     <div style="font-size:clamp(.85rem,1.3vw,1.2rem);font-weight:300;letter-spacing:.34em;text-transform:uppercase;color:#111;">Obrigado</div>
-    <button onclick="goTo(0)" class="btn-nav" style="bottom:2rem;right:2.8rem;background:none;border:none;font-size:.46rem;font-weight:300;letter-spacing:.22em;text-transform:uppercase;color:#bbb;cursor:pointer;position:absolute;">página inicial</button>`;
+    <button onclick="event.stopPropagation();goTo(0)" class="btn-nav" style="bottom:2rem;right:2.8rem;background:none;border:none;font-size:.46rem;font-weight:300;letter-spacing:.22em;text-transform:uppercase;color:#bbb;cursor:pointer;position:absolute;">página inicial</button>`;
   document.body.appendChild(d);
   SLIDES.push({type:'end'});
 })();
@@ -716,6 +744,19 @@ function updateNm(){
 document.addEventListener('keydown', e => {
   if(e.key === 'ArrowRight' || e.key === 'ArrowDown') go(+1);
   if(e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   go(-1);
+});
+
+// ── clique para navegar (document-level, evita conflito de z-index com os slides) ──
+document.addEventListener('click', function(e) {
+  if(e.target.closest('.btn-nav')) return; // deixa botões funcionarem
+  if(cur === 2 && window.innerWidth <= 768) return; // slide 2 é scrollável no mobile
+  go(e.clientX < window.innerWidth / 2 ? -1 : +1);
+});
+
+// ── cursor (metade esquerda = voltar, direita = avançar) ──
+document.addEventListener('mousemove', function(e) {
+  if(cur === 2) { document.body.style.cursor = ''; return; }
+  document.body.style.cursor = e.clientX < window.innerWidth / 2 ? 'w-resize' : 'e-resize';
 });
 
 // ── swipe (mobile) ──────────────────────────────────
